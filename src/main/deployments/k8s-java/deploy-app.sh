@@ -1,5 +1,9 @@
 #!/bin/bash
 
+set -a
+source "./../../../../.env"
+set +a
+
 kubectl config set-context --current --namespace="bnl-test-app-namespace"
 
 kubectl delete serviceaccount test-app-java-sdk-sa --ignore-not-found=true
@@ -7,18 +11,16 @@ kubectl create serviceaccount test-app-java-sdk-sa
 
 kubectl delete secret generic java-sdk-credentials --ignore-not-found=true
 
-openssl s_client -connect emea-cybr.secretsmgr.cyberark.cloud:443 \
+openssl s_client -connect "$CONJUR_MASTER_HOSTNAME":"$CONJUR_MASTER_PORT" \
   -showcerts </dev/null 2> /dev/null | \
   awk '/BEGIN CERTIFICATE/,/END CERTIFICATE/ {print $0}' \
   > conjur.pem
 
-cat ./../conjur-cloud-ca >> conjur.pem
-
 kubectl create secret generic java-sdk-credentials  \
-        --from-literal=conjur-authn-api-key=2esa1621p2h7vw3bhf3cav1cnsr2ab69e33teaz152rvgm3q2rdxv91  \
-        --from-literal=conjur-account=conjur \
-        --from-literal=conjur-authn-login=host/data/bnl/ocp-team/ocp-apps/test-app-java-sdk-sa \
-        --from-literal=conjur-appliance-url=https://emea-cybr.secretsmgr.cyberark.cloud/api  \
+        --from-literal=conjur-authn-api-key="$CONJUR_AUTHN_API_KEY"  \
+        --from-literal=conjur-account="$CONJUR_ACCOUNT" \
+        --from-literal=conjur-authn-login="$CONJUR_AUTHN_LOGIN" \
+        --from-literal=conjur-appliance-url="$CONJUR_APPLIANCE_URL"  \
         --from-file "CONJUR_SSL_CERTIFICATE=conjur.pem"
 
 # DEPLOYMENT

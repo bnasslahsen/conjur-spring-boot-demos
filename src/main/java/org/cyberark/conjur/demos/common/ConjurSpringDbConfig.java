@@ -12,14 +12,14 @@ import org.springframework.context.annotation.Profile;
 /**
  * @author bnasslahsen
  */
-@Profile("secured-api")
+@Profile("secured-api-spring")
 @Primary
 @Configuration(proxyBeanMethods=false)
 @ConfigurationProperties(prefix = "spring.datasource")
-@ConjurPropertySource(value={"data/vault/bnl-ocp-safe/Database-MySQL-jdbch2memtestdb-h2-user/"})
+@ConjurPropertySource(value={"data/bnl/ocp-apps/"})
 public class ConjurSpringDbConfig extends DataSourceProperties {
 
-    @Value("${address}")
+    @Value("${url}")
 	private byte[] url;
     @Value("${username}")
     private byte[] username;

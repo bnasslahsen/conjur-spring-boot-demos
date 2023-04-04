@@ -3,12 +3,15 @@ springdoc:
   swagger-ui:
     use-root-path: true
 
+conjur:
+  jwt-token-path: /Users/Badr.NassLahsen/Documents/workspace/conjur-spring-boot-demos/src/main/resources/jwt.json
+  service-id: jwt-cluster
+
 app:
   secret:
     url: data/bnl/ocp-apps/url
     username: data/bnl/ocp-apps/username
     password: data/bnl/ocp-apps/password
-
 
 logging:
   level:

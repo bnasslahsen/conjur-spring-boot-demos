@@ -1,6 +1,8 @@
 package org.cyberark.conjur.demos.common;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
 import java.net.URLEncoder;
@@ -37,7 +39,7 @@ import org.springframework.context.annotation.Profile;
  *
  * @author bnasslahsen
  */
-@Profile("secured-api-java-jwt")
+@Profile("secured-jwt")
 @Primary
 @Configuration(proxyBeanMethods = false)
 @ConfigurationProperties(prefix = "spring.datasource")
@@ -121,6 +123,10 @@ public class ConjurJavaJwtDbConfig extends DataSourceProperties {
 		LOGGER.debug("Using Account: " + conjurClient.getAccount());
 		LOGGER.debug("Using ApplianceUrl: " + conjurClient.getBasePath());
 		LOGGER.debug("Using SSL CERT: " + System.getenv().get("CONJUR_SSL_CERTIFICATE"));
+
+		InputStream sslInputStream = new ByteArrayInputStream(System.getenv().get("CONJUR_SSL_CERTIFICATE").getBytes(StandardCharsets.UTF_8));
+		conjurClient.setSslCaCert(sslInputStream);
+		sslInputStream.close();
 
 		final AccessToken accessToken;
 		AuthenticationApi apiInstance = new AuthenticationApi(conjurClient);

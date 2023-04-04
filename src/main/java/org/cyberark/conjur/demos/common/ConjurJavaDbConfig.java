@@ -122,6 +122,10 @@ public class ConjurJavaDbConfig extends DataSourceProperties {
 		LOGGER.debug("Using Password: " + System.getenv().get("CONJUR_AUTHN_API_KEY"));
 		LOGGER.debug("Using SSL CERT: " + System.getenv().get("CONJUR_SSL_CERTIFICATE"));
 
+		InputStream sslInputStream = new ByteArrayInputStream(System.getenv().get("CONJUR_SSL_CERTIFICATE").getBytes(StandardCharsets.UTF_8));
+		conjurClient.setSslCaCert(sslInputStream);
+		sslInputStream.close();
+
 		AccessToken accessToken = conjurClient.getNewAccessToken();
 		if (accessToken == null)
 			throw new IllegalArgumentException("Unable to get the Access Token from CyberArk Conjur. Please check your configuration!");
