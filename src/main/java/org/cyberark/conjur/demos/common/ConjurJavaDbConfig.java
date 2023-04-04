@@ -44,24 +44,25 @@ import org.springframework.context.annotation.Profile;
 @ConfigurationProperties(prefix = "spring.datasource")
 public class ConjurJavaDbConfig extends DataSourceProperties {
 
-	/**
-	 * The constant VARIABLE.
-	 */
-	private static final String VARIABLE = ":variable:";
 
 	/**
 	 * The App config.
 	 */
 	private SecretsConfig secretsConfig;
 
-	public ConjurJavaDbConfig(SecretsConfig secretsConfig) {
-		this.secretsConfig = secretsConfig;
-	}
+	/**
+	 * The constant VARIABLE.
+	 */
+	private static final String VARIABLE = ":variable:";
 
 	/**
 	 * The constant LOGGER.
 	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(ConjurJavaDbConfig.class);
+
+	public ConjurJavaDbConfig(SecretsConfig secretsConfig) {
+		this.secretsConfig = secretsConfig;
+	}
 
 	/**
 	 * After properties set.
@@ -85,7 +86,6 @@ public class ConjurJavaDbConfig extends DataSourceProperties {
 
 		SecretsApi secretsApi = new SecretsApi();
 		Map<String, String> response;
-
 
 		try {
 			String account = secretsApi.getApiClient().getAccount();

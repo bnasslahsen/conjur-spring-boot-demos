@@ -21,7 +21,14 @@ podman build --arch=amd64 -t conjur-spring-boot-demos .
 ```
 
 
-To run with shell:
+## Test the application from the IDE:
+
+- Copy
+
+```shell
+./get-conjur-certs.sh
+```
+
 
 ```shell
 ./run.sh
