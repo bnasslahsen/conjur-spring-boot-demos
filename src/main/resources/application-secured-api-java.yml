@@ -1,0 +1,15 @@
+springdoc:
+  writer-with-order-by-keys: true
+  swagger-ui:
+    use-root-path: true
+
+app:
+  secret:
+    url: data/vault/bnl-ocp-safe/Database-MySQL-jdbch2memtestdb-h2-user/address
+    username: data/vault/bnl-ocp-safe/Database-MySQL-jdbch2memtestdb-h2-user/username
+    password: data/vault/bnl-ocp-safe/Database-MySQL-jdbch2memtestdb-h2-user/password
+
+
+logging:
+  level:
+    org.cyberark: DEBUG

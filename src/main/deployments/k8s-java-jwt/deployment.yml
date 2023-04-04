@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-app-java-sdk-jwt
+  namespace: bnl-test-app-namespace
+  labels:
+    app: test-app-java-sdk-jwt
+spec:
+  selector:
+    matchLabels:
+      app: test-app-java-sdk-jwt
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: test-app-java-sdk-jwt
+    spec:
+      serviceAccountName: test-app-java-sdk-jwt-sa
+      containers:
+        - name: test-app-java-sdk-jwt
+          image: bnasslahsen/conjur-spring-boot-demos
+          imagePullPolicy: Always
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: secured-api-java-jwt
+            - name: CONJUR_ACCOUNT
+              valueFrom:
+                secretKeyRef:
+                  name: java-sdk-credentials-jwt
+                  key: conjur-account
+            - name: CONJUR_SSL_CERTIFICATE
+              valueFrom:
+                secretKeyRef:
+                  name: java-sdk-credentials-jwt
+                  key: CONJUR_SSL_CERTIFICATE
+            - name: CONJUR_SERVICE_ID
+              valueFrom:
+                secretKeyRef:
+                  name: java-sdk-credentials-jwt
+                  key: conjur-service-id
+            - name: CONJUR_APPLIANCE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: java-sdk-credentials-jwt
+                  key: conjur-appliance-url
+            - name: CONJUR_JWT_TOKEN_PATH
+              valueFrom:
+                secretKeyRef:
+                  name: java-sdk-credentials-jwt
+                  key: conjur-jwt-token-path
+            - name: LOGGING_LEVEL_ORG_CYBERARK
+              value: DEBUG
+          volumeMounts:
+            - name: jwt-token
+              mountPath: /var/run/secrets/tokens
+          ports:
+            - containerPort: 8080
+      volumes:
+        - name: jwt-token
+          projected:
+            sources:
+              - serviceAccountToken:
+                  path: jwt
+                  expirationSeconds: 6000
+                  audience: conjur
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: test-app-java-sdk-jwt
+  namespace: bnl-test-app-namespace
+spec:
+  type: NodePort
+  ports:
+    - port: 8080
+      nodePort: 32098
+  selector:
+    app: test-app-java-sdk-jwt
+---
