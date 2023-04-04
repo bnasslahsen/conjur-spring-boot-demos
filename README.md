@@ -19,3 +19,10 @@ If you don't have access to dockerhub and you need to build the images then, aft
 # or with podman run -it --rm -v $HOME/.m2:/root/.m2 -v "$(pwd)":/build -w /build maven mvn clean package
 podman build --arch=amd64 -t conjur-spring-boot-demos .
 ```
+
+
+To run with shell:
+
+```shell
+./run.sh
+```
