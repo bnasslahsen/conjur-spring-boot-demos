@@ -77,25 +77,6 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<image>
-						<name>
-							docker.io/bnasslahsen/${image.name}
-						</name>
-						<tags><tag>docker.io/bnasslahsen/${image.name}:${project.version}</tag></tags>
-						<builder>paketobuildpacks/builder:tiny</builder>
-						<runImage>docker.io/bnasslahsen/run:small-cnb</runImage>
-						<publish>true</publish>
-						<pullPolicy>IF_NOT_PRESENT</pullPolicy>
-					</image>
-					<docker>
-						<publishRegistry>
-							<url>https://docker.io/</url>
-							<username>${publishRegistry.username}</username>
-							<password>${publishRegistry.password}</password>
-						</publishRegistry>
-					</docker>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>
