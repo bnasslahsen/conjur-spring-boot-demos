@@ -1,6 +1,7 @@
 package org.cyberark.conjur.demos.common;
 
 import com.cyberark.conjur.springboot.annotations.ConjurPropertySource;
+import com.cyberark.conjur.springboot.annotations.ConjurValue;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
@@ -24,7 +25,7 @@ public class ConjurSpringDbConfig extends DataSourceProperties {
     @Value("${username}")
     private byte[] username;
 
-    @Value("${password}")
+    @ConjurValue(key="data/bnl/ocp-apps/password")
     private byte[] password;
 
     @Override

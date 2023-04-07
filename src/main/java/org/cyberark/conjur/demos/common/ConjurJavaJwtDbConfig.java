@@ -1,30 +1,22 @@
 package org.cyberark.conjur.demos.common;
 
 import java.io.ByteArrayInputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Field;
-import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Base64;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
 import com.cyberark.conjur.sdk.AccessToken;
 import com.cyberark.conjur.sdk.ApiClient;
 import com.cyberark.conjur.sdk.ApiException;
-import com.cyberark.conjur.sdk.ApiResponse;
 import com.cyberark.conjur.sdk.endpoint.AuthenticationApi;
 import com.cyberark.conjur.sdk.endpoint.SecretsApi;
-import com.google.gson.reflect.TypeToken;
-import okhttp3.Call;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.reflect.FieldUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -124,9 +116,18 @@ public class ConjurJavaJwtDbConfig extends DataSourceProperties {
 		LOGGER.debug("Using ApplianceUrl: " + conjurClient.getBasePath());
 		LOGGER.debug("Using SSL CERT: " + System.getenv().get("CONJUR_SSL_CERTIFICATE"));
 
-		InputStream sslInputStream = new ByteArrayInputStream(System.getenv().get("CONJUR_SSL_CERTIFICATE").getBytes(StandardCharsets.UTF_8));
-		conjurClient.setSslCaCert(sslInputStream);
-		sslInputStream.close();
+		InputStream sslInputStream = null;
+		if (StringUtils.isNotEmpty(System.getenv().get("CONJUR_SSL_CERTIFICATE"))) {
+			sslInputStream = new ByteArrayInputStream(System.getenv().get("CONJUR_SSL_CERTIFICATE").getBytes(StandardCharsets.UTF_8));
+		}
+		else if (StringUtils.isNotEmpty(System.getenv().get("CONJUR_CERT_FILE")))
+			sslInputStream = new FileInputStream(System.getenv().get("CONJUR_CERT_FILE"));
+
+		if (sslInputStream != null) {
+			conjurClient.setSslCaCert(sslInputStream);
+			sslInputStream.close();
+		}
+
 
 		final AccessToken accessToken;
 		AuthenticationApi apiInstance = new AuthenticationApi(conjurClient);

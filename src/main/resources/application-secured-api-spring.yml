@@ -2,3 +2,7 @@ springdoc:
   writer-with-order-by-keys: true
   swagger-ui:
     use-root-path: true
+
+logging:
+  level:
+    com.cyberark: DEBUG
