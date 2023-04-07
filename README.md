@@ -45,6 +45,8 @@ cd src/main/conjur
 ```shell
 ./mvnw clean package
 podman build --arch=amd64 -t conjur-spring-boot-demos .
+OR 
+./mvnw spring-boot:build-image
 ```
 
 ## Deploy to k8s
@@ -53,15 +55,52 @@ podman build --arch=amd64 -t conjur-spring-boot-demos .
 ```shell
 cd src/main/deployments/1-k8s-secrets
 ./deploy-app.sh
+```
 
 - For API KEY profile:
 ```shell
 cd src/main/deployments/2-java-api-key
 ./deploy-app.sh
-
+```
 
 - For JWT profile:
-cd src/main/deployments/k8s-java-jwt
+```shell
+cd src/main/deployments/3-java-jwt
 ./deploy-app.sh
 ```
 
+- For Secrets Provider for k8s with Init container:
+```shell
+  cd src/main/deployments/4-secrets-provider-init
+  ./deploy-app.sh
+```
+
+- For Secrets Provider for k8s with Sidecar container:
+```shell
+cd src/main/deployments/5-secrets-provider-sidecar
+./deploy-app.sh
+```
+
+- For Push to File with Sidecar container:
+```shell
+cd src/main/deployments/6-push-to-file
+  ./deploy-app.sh
+```
+
+- For Summon with Init Container:
+```shell
+cd src/main/deployments/7-summon-init
+  ./deploy-app.sh
+```
+
+- For Summon with Sidecar Container:
+```shell
+cd src/main/deployments/8-summon-sidecar
+  ./deploy-app.sh
+```
+
+- For Secretless:
+```shell
+cd src/main/deployments/9-secretless
+  ./deploy-app.sh
+```
