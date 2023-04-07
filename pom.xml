@@ -80,9 +80,9 @@
 				<configuration>
 					<image>
 						<name>
-							docker.io/bnasslahsen/${image.name}
+							docker.io/bnasslahsen/${project.artifactId}
 						</name>
-						<tags><tag>docker.io/bnasslahsen/${image.name}:${project.version}</tag></tags>
+						<tags><tag>docker.io/bnasslahsen/${project.artifactId}:${project.version}</tag></tags>
 						<builder>paketobuildpacks/builder:tiny</builder>
 						<runImage>docker.io/bnasslahsen/run:small-cnb</runImage>
 						<publish>true</publish>
