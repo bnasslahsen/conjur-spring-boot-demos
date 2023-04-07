@@ -1,0 +1,91 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: demo-app-secrets-provider-init
+  name: demo-app-secrets-provider-init
+  namespace: $APP_NAMESPACE
+spec:
+  selector:
+    matchLabels:
+      app: demo-app-secrets-provider-init
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: demo-app-secrets-provider-init
+    spec:
+      serviceAccountName: demo-app-secrets-provider-init-sa
+      containers:
+        - name: demo-app-secrets-provider-init
+          image: bnasslahsen/conjur-spring-boot-demos
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: not-secured
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials-secrets-provider-for-k8s-init
+                  key: username
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials-secrets-provider-for-k8s-init
+                  key: password
+            - name: DB_URL
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials-secrets-provider-for-k8s-init
+                  key: address
+          ports:
+            - containerPort: 8080
+      initContainers:
+        - image: cyberark/secrets-provider-for-k8s
+          imagePullPolicy: IfNotPresent
+          name: configurator
+          volumeMounts:
+            - name: conjur-status
+              mountPath: /conjur/status
+            - name: jwt-token
+              mountPath: /var/run/secrets/tokens
+          env:
+            - name: JWT_TOKEN_PATH
+              value: /var/run/secrets/tokens/jwt
+            - name: CONTAINER_MODE
+              value: init
+            - name: MY_POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: K8S_SECRETS
+              value: db-credentials-secrets-provider-for-k8s-init
+            - name: SECRETS_DESTINATION
+              value: k8s_secrets
+          envFrom:
+            - configMapRef:
+                name: conjur-connect
+      volumes:
+        - name: conjur-status
+          emptyDir:
+            medium: Memory
+        - name: jwt-token
+          projected:
+            sources:
+              - serviceAccountToken:
+                  path: jwt
+                  expirationSeconds: 6000
+                  audience: conjur
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: demo-app-secrets-provider-init
+  namespace: $APP_NAMESPACE
+spec:
+  type: NodePort
+  ports:
+    - port: 8080
+      nodePort: 32082
+  selector:
+    app: demo-app-secrets-provider-init

@@ -1,0 +1,89 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: demo-app-summon-sidecar
+  name: demo-app-summon-sidecar
+  namespace: $APP_NAMESPACE
+spec:
+  selector:
+    matchLabels:
+      app: demo-app-summon-sidecar
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: demo-app-summon-sidecar
+    spec:
+      serviceAccountName: demo-app-summon-sidecar-sa
+      containers:
+        - name: demo-app-summon-sidecar
+          image: bnasslahsen/conjur-spring-boot-demos
+          imagePullPolicy: IfNotPresent
+          command: [ "summon", "--provider", "summon-conjur" ,"-f", "/etc/summon/secrets.yml", "java", "-jar", "/app/target/conjur-k8s-demo-3.0.jar" ]
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: not-secured
+            - name: CONJUR_AUTHN_TOKEN_FILE
+              value: /run/conjur/access-token
+            - name: SPRING_PROFILES_ACTIVE
+              value: summon
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: conjur-connect
+          volumeMounts:
+            - mountPath: /run/conjur
+              name: conjur-access-token
+              readOnly: true
+            - mountPath: /etc/summon
+              name: summon-config
+              readOnly: true
+        - image: cyberark/conjur-openshift-authenticator
+          imagePullPolicy: IfNotPresent
+          name: configurator
+          volumeMounts:
+            - mountPath: /run/conjur
+              name: conjur-access-token
+            - name: jwt-token
+              mountPath: /var/run/secrets/tokens
+          env:
+            - name: MY_POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: JWT_TOKEN_PATH
+              value: /var/run/secrets/tokens/jwt
+          envFrom:
+            - configMapRef:
+                name: conjur-connect
+      volumes:
+        - name: jwt-token
+          projected:
+            sources:
+              - serviceAccountToken:
+                  path: jwt
+                  expirationSeconds: 6000
+                  audience: conjur
+        - name: conjur-access-token
+          emptyDir:
+            medium: Memory
+        - name: summon-config
+          configMap:
+            name: summon-config-sidecar
+            defaultMode: 420
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: demo-app-summon-sidecar
+  namespace: $APP_NAMESPACE
+spec:
+  type: NodePort
+  ports:
+    - port: 8080
+      nodePort: 32085
+  selector:
+    app: demo-app-summon-sidecar
+---

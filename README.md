@@ -34,10 +34,10 @@ cd src/main/conjur
 ## Test the application outside the IDE:
 ```shell
 ./mvnw clean package
-./run.sh not-secured
-./run.sh secured-api-spring
-./run.sh secured-api-java
-./run.sh secured-jwt
+./.run.sh not-secured
+./.run.sh secured-api-spring
+./.run.sh secured-api-java
+./.run.sh secured-jwt
 ```
 
 ## Building the Docker images
@@ -49,9 +49,14 @@ podman build --arch=amd64 -t conjur-spring-boot-demos .
 
 ## Deploy to k8s
 
+- For Application with K8s secrets:
+```shell
+cd src/main/deployments/1-k8s-secrets
+./deploy-app.sh
+
 - For API KEY profile:
 ```shell
-cd src/main/deployments/k8s-java
+cd src/main/deployments/2-java-api-key
 ./deploy-app.sh
 
 

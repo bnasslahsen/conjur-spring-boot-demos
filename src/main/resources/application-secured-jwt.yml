@@ -5,7 +5,7 @@ springdoc:
 
 conjur:
   jwt-token-path: /Users/Badr.NassLahsen/Documents/workspace/conjur-spring-boot-demos/src/main/resources/jwt.json
-  service-id: jwt-cluster
+  service-id: demo-cluster
 
 app:
   secret:

@@ -4,16 +4,42 @@
   body:
     - !group
     - &hosts
+      - !host demo-app-api-key
       - !host
-        id: test-app-java-sdk-sa
+        id: system:serviceaccount:bnl-demo-app-ns:demo-app-jwt-sa
         annotations:
-          authn/api-key: true
+          authn-jwt/demo-cluster/kubernetes.io/namespace: bnl-demo-app-ns
+          authn-jwt/demo-cluster/kubernetes.io/serviceaccount/name: demo-app-jwt-sa
       - !host
-        id: system:serviceaccount:bnl-test-app-namespace:test-app-java-sdk-jwt-sa
+        id: system:serviceaccount:bnl-demo-app-ns:demo-app-secrets-provider-init-sa
         annotations:
-          authn-jwt/jwt-cluster/kubernetes.io/namespace: bnl-test-app-namespace
-          authn-jwt/jwt-cluster/kubernetes.io/serviceaccount/name: test-app-java-sdk-jwt-sa
-          authn/api-key: true
+          authn-jwt/demo-cluster/kubernetes.io/namespace: bnl-demo-app-ns
+          authn-jwt/demo-cluster/kubernetes.io/serviceaccount/name: demo-app-secrets-provider-init-sa
+      - !host
+        id: system:serviceaccount:bnl-demo-app-ns:demo-app-secrets-provider-sidecar-sa
+        annotations:
+          authn-jwt/demo-cluster/kubernetes.io/namespace: bnl-demo-app-ns
+          authn-jwt/demo-cluster/kubernetes.io/serviceaccount/name: demo-app-secrets-provider-sidecar-sa
+      - !host
+        id: system:serviceaccount:bnl-demo-app-ns:demo-app-push-to-file-sidecar-sa
+        annotations:
+          authn-jwt/demo-cluster/kubernetes.io/namespace: bnl-demo-app-ns
+          authn-jwt/demo-cluster/kubernetes.io/serviceaccount/name: demo-app-push-to-file-sidecar-sa
+      - !host
+        id: system:serviceaccount:bnl-demo-app-ns:demo-app-summon-init-sa
+        annotations:
+          authn-jwt/demo-cluster/kubernetes.io/namespace: bnl-demo-app-ns
+          authn-jwt/demo-cluster/kubernetes.io/serviceaccount/name: demo-app-summon-init-sa
+      - !host
+        id: system:serviceaccount:bnl-demo-app-ns:demo-app-summon-sidecar-sa
+        annotations:
+          authn-jwt/demo-cluster/kubernetes.io/namespace: bnl-demo-app-ns
+          authn-jwt/demo-cluster/kubernetes.io/serviceaccount/name: demo-app-summon-sidecar-sa
+      - !host
+        id: system:serviceaccount:bnl-demo-app-ns:demo-app-secretless-sa
+        annotations:
+          authn-jwt/demo-cluster/kubernetes.io/namespace: bnl-demo-app-ns
+          authn-jwt/demo-cluster/kubernetes.io/serviceaccount/name: demo-app-secretless-sa
     - !grant
       role: !group
       members: *hosts
@@ -21,6 +47,10 @@
       - !variable url
       - !variable username
       - !variable password
+      - !variable mysql-host
+      - !variable mysql-port
+      - !variable mysql-username
+      - !variable mysql-password
     - !permit
       role: !group
       privilege: [ read, execute ]

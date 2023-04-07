@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: test-app-java-sdk
-  namespace: bnl-test-app-namespace
+  name: demo-app-api-key
+  namespace: bnl-demo-app-ns
   labels:
-    app: test-app-java-sdk
+    app: demo-app-api-key
 spec:
   selector:
     matchLabels:
-      app: test-app-java-sdk
+      app: demo-app-api-key
   replicas: 1
   template:
     metadata:
       labels:
-        app: test-app-java-sdk
+        app: demo-app-api-key
     spec:
-      serviceAccountName: test-app-java-sdk-sa
+      serviceAccountName: demo-app-api-key-sa
       containers:
-        - name: test-app-java-sdk
+        - name: demo-app-api-key
           image: bnasslahsen/conjur-spring-boot-demos
           imagePullPolicy: Always
           env:
@@ -26,27 +26,27 @@ spec:
             - name: CONJUR_AUTHN_API_KEY
               valueFrom:
                 secretKeyRef:
-                  name: java-sdk-credentials
+                  name: spring-boot-credentials
                   key: conjur-authn-api-key
             - name: CONJUR_AUTHN_LOGIN
               valueFrom:
                 secretKeyRef:
-                  name: java-sdk-credentials
+                  name: spring-boot-credentials
                   key: conjur-authn-login
             - name: CONJUR_ACCOUNT
               valueFrom:
                 secretKeyRef:
-                  name: java-sdk-credentials
+                  name: spring-boot-credentials
                   key: conjur-account
             - name: CONJUR_APPLIANCE_URL
               valueFrom:
                 secretKeyRef:
-                  name: java-sdk-credentials
+                  name: spring-boot-credentials
                   key: conjur-appliance-url
             - name: CONJUR_SSL_CERTIFICATE
               valueFrom:
                 secretKeyRef:
-                  name: java-sdk-credentials
+                  name: spring-boot-credentials
                   key: CONJUR_SSL_CERTIFICATE
             - name: LOGGING_LEVEL_ORG_CYBERARK
               value: DEBUG
@@ -56,13 +56,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: test-app-java-sdk
-  namespace: bnl-test-app-namespace
+  name: demo-app-api-key
+  namespace: bnl-demo-app-ns
 spec:
   type: NodePort
   ports:
     - port: 8080
       nodePort: 32094
   selector:
-    app: test-app-java-sdk
+    app: demo-app-api-key
 ---
