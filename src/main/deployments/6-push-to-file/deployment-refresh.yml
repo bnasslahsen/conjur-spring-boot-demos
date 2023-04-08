@@ -63,6 +63,22 @@ spec:
           envFrom:
             - configMapRef:
                 name: conjur-connect
+          livenessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - |
+                  /conjur/status/conjur-secrets-unchanged.sh
+                  if [ "$?" -ne 0 ]; then
+                      wget -q --header="Content-Type: application/json" --post-data='{}' http://localhost:8080/actuator/refresh >/dev/null 2>&1
+                      exit 0
+                  fi
+            failureThreshold: 1
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
           volumeMounts:
             - name: podinfo
               mountPath: /conjur/podinfo
