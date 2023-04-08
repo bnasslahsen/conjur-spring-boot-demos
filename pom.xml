@@ -67,12 +67,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-
-		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
@@ -98,9 +92,9 @@
 				<configuration>
 					<image>
 						<name>
-							docker.io/bnasslahsen/${project.artifactId}
+							docker.io/bnasslahsen/${image.name}
 						</name>
-						<tags><tag>docker.io/bnasslahsen/${project.artifactId}:${project.version}</tag></tags>
+						<tags><tag>docker.io/bnasslahsen/${image.name}:${project.version}</tag></tags>
 						<publish>true</publish>
 						<pullPolicy>IF_NOT_PRESENT</pullPolicy>
 					</image>
@@ -116,4 +110,35 @@
 		</plugins>
 	</build>
 
+	<profiles>
+		<profile>
+			<id>h2</id>
+			<properties>
+				<image.name>${project.artifactId}</image.name>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>com.h2database</groupId>
+					<artifactId>h2</artifactId>
+					<scope>runtime</scope>
+				</dependency>
+			</dependencies>
+		</profile>
+		<profile>
+			<id>mysql</id>
+			<properties>
+				<image.name>${project.artifactId}-mysql</image.name>
+			</properties>
+			<dependencies>
+				<dependency>
+					<groupId>mysql</groupId>
+					<artifactId>mysql-connector-java</artifactId>
+					<scope>runtime</scope>
+				</dependency>
+			</dependencies>
+		</profile>
+	</profiles>
 </project>

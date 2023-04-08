@@ -34,6 +34,8 @@ cd src/main/conjur
 ## Test the application outside the IDE:
 ```shell
 ./mvnw clean package
+
+
 ./run.sh not-secured
 ./run.sh secured-api-spring
 ./run.sh secured-api-java
