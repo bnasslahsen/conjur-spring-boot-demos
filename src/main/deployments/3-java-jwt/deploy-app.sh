@@ -25,13 +25,6 @@ kubectl create configmap conjur-connect-spring-jwt \
   --from-literal LOGGING_LEVEL_COM_CYBERARK=DEBUG  \
   --from-file "CONJUR_SSL_CERTIFICATE=conjur.pem"
 
-kubectl create secret generic spring-boot-credentials-jwt  \
-        --from-literal=conjur-service-id="demo-cluster"  \
-        --from-literal=conjur-account="$CONJUR_ACCOUNT" \
-        --from-literal=conjur-jwt-token-path="/var/run/secrets/tokens/jwt" \
-        --from-literal=conjur-appliance-url="$CONJUR_APPLIANCE_URL"  \
-        --from-file "CONJUR_SSL_CERTIFICATE=conjur.pem"
-
 # DEPLOYMENT
 envsubst < deployment.yml | kubectl replace --force -f -
 if ! kubectl wait deployment demo-app-jwt --for condition=Available=True --timeout=90s
