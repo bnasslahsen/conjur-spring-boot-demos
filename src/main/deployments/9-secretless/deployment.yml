@@ -17,18 +17,20 @@ spec:
     spec:
       serviceAccountName: demo-app-secretless-sa
       containers:
-        - image: bnasslahsen/conjur-spring-boot-demos
+        - image: bnasslahsen/conjur-spring-boot-demos-mysql
           name: demo-app-secretless
-          imagePullPolicy: IfNotPresent
-          env:
-            - name: SPRING_PROFILES_ACTIVE
-              value: not-secured
-            - name: DB_URL
-              value: jdbc:mysql://localhost:3306/demo-db
-            - name: DB_USERNAME
-              value: dummy
-            - name: DB_PASSWORD
-              value: dummy
+          imagePullPolicy: Always
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 8080
+          envFrom:
+            - configMapRef:
+                name: conjur-connect-secretless
           ports:
             - containerPort: 8080
         - name: configurator

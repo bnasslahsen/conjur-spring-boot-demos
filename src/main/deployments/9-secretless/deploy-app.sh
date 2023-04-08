@@ -11,15 +11,24 @@ kubectl create serviceaccount demo-app-secretless-sa
 
 # DB SECRETLESS CONFIGMAP
 kubectl delete configmap secretless-config-mysql --ignore-not-found=true
+kubectl delete configmap conjur-connect-secretless --ignore-not-found=true
+
 envsubst < secretless.template.yml > secretless.yml
 kubectl create configmap secretless-config-mysql  --from-file=secretless.yml
 rm secretless.yml
 
+
+kubectl create configmap conjur-connect-secretless \
+  --from-literal SPRING_PROFILES_ACTIVE=not-secured \
+  --from-literal SPRING_DATASOURCE_URL=jdbc:mysql://localhost:3306/demo-db \
+  --from-literal SPRING_DATASOURCE_USERNAME=dummy \
+  --from-literal SPRING_DATASOURCE_PASSWORD=dummy
+
 # DB DEPLOYMENT
-envsubst < db.yml | kubectl replace --force -f -
-if ! kubectl wait deployment demo-db-mysql --for condition=Available=True --timeout=120s
-  then exit 1
-fi
+#envsubst < db.yml | kubectl replace --force -f -
+#if ! kubectl wait deployment demo-db-mysql --for condition=Available=True --timeout=120s
+#  then exit 1
+#fi
 
 # APP DEPLOYMENT
 envsubst < deployment.yml | kubectl replace --force -f -

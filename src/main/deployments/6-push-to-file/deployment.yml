@@ -38,6 +38,10 @@ spec:
             httpGet:
               path: /actuator/health
               port: 8080
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 8080
           env:
             - name: SPRING_CONFIG_LOCATION
               value: /opt/secrets/conjur/

@@ -24,6 +24,10 @@ spec:
             httpGet:
               path: /actuator/health
               port: 8080
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 8080
           envFrom:
             - configMapRef:
                 name: conjur-connect-spring-jwt
