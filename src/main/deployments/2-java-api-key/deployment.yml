@@ -20,36 +20,13 @@ spec:
         - name: demo-app-api-key
           image: bnasslahsen/conjur-spring-boot-demos
           imagePullPolicy: Always
-          env:
-            - name: SPRING_PROFILES_ACTIVE
-              value: secured-api-java
-            - name: CONJUR_AUTHN_API_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: spring-boot-credentials
-                  key: conjur-authn-api-key
-            - name: CONJUR_AUTHN_LOGIN
-              valueFrom:
-                secretKeyRef:
-                  name: spring-boot-credentials
-                  key: conjur-authn-login
-            - name: CONJUR_ACCOUNT
-              valueFrom:
-                secretKeyRef:
-                  name: spring-boot-credentials
-                  key: conjur-account
-            - name: CONJUR_APPLIANCE_URL
-              valueFrom:
-                secretKeyRef:
-                  name: spring-boot-credentials
-                  key: conjur-appliance-url
-            - name: CONJUR_SSL_CERTIFICATE
-              valueFrom:
-                secretKeyRef:
-                  name: spring-boot-credentials
-                  key: CONJUR_SSL_CERTIFICATE
-            - name: LOGGING_LEVEL_ORG_CYBERARK
-              value: DEBUG
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+          envFrom:
+            - configMapRef:
+                name: conjur-connect-java-api-key
           ports:
             - containerPort: 8080
 ---

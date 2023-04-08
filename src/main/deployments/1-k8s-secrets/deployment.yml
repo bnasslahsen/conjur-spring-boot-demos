@@ -20,6 +20,10 @@ spec:
         - name: demo-app
           image: bnasslahsen/conjur-spring-boot-demos
           imagePullPolicy: Always
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: not-secured

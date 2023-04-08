@@ -34,10 +34,9 @@ cd src/main/conjur
 ## Test the application outside the IDE:
 ```shell
 ./mvnw clean package
-./.run.sh not-secured
-./.run.sh secured-api-spring
-./.run.sh secured-api-java
-./.run.sh secured-jwt
+./run.sh not-secured
+./run.sh secured-api-spring
+./run.sh secured-api-java
 ```
 
 ## Building the Docker images
@@ -104,3 +103,6 @@ cd src/main/deployments/8-summon-sidecar
 cd src/main/deployments/9-secretless
   ./deploy-app.sh
 ```
+
+### Rotation without an application restart:
+

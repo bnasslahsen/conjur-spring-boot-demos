@@ -22,6 +22,7 @@ public class ConjurSpringDbConfig extends DataSourceProperties {
 
     @Value("${url}")
 	private byte[] url;
+	
     @Value("${username}")
     private byte[] username;
 

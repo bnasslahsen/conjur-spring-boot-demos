@@ -20,36 +20,13 @@ spec:
         - name: demo-app-jwt
           image: bnasslahsen/conjur-spring-boot-demos
           imagePullPolicy: Always
-          env:
-            - name: SPRING_PROFILES_ACTIVE
-              value: secured-jwt
-            - name: CONJUR_ACCOUNT
-              valueFrom:
-                secretKeyRef:
-                  name: spring-boot-credentials-jwt
-                  key: conjur-account
-            - name: CONJUR_SSL_CERTIFICATE
-              valueFrom:
-                secretKeyRef:
-                  name: spring-boot-credentials-jwt
-                  key: CONJUR_SSL_CERTIFICATE
-            - name: CONJUR_SERVICE_ID
-              valueFrom:
-                secretKeyRef:
-                  name: spring-boot-credentials-jwt
-                  key: conjur-service-id
-            - name: CONJUR_APPLIANCE_URL
-              valueFrom:
-                secretKeyRef:
-                  name: spring-boot-credentials-jwt
-                  key: conjur-appliance-url
-            - name: CONJUR_JWT_TOKEN_PATH
-              valueFrom:
-                secretKeyRef:
-                  name: spring-boot-credentials-jwt
-                  key: conjur-jwt-token-path
-            - name: LOGGING_LEVEL_ORG_CYBERARK
-              value: DEBUG
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+          envFrom:
+            - configMapRef:
+                name: conjur-connect-spring-jwt
           volumeMounts:
             - name: jwt-token
               mountPath: /var/run/secrets/tokens
