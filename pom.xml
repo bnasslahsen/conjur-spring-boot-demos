@@ -19,6 +19,7 @@
 		<springdoc.version>2.1.0</springdoc.version>
 		<conjur-sdk-springboot.version>0.0.1-SNAPSHOT</conjur-sdk-springboot.version>
 		<spring-cloud.version>2022.0.2</spring-cloud.version>
+		<mysql.version>8.0.31</mysql.version>
 	</properties>
 
 	<dependencyManagement>
@@ -136,7 +137,7 @@
 				<dependency>
 					<groupId>mysql</groupId>
 					<artifactId>mysql-connector-java</artifactId>
-					<scope>runtime</scope>
+					<version>${mysql.version}</version>
 				</dependency>
 			</dependencies>
 		</profile>

@@ -16,10 +16,10 @@ kubectl create configmap secretless-config-mysql  --from-file=secretless.yml
 rm secretless.yml
 
 # DB DEPLOYMENT
-#envsubst < db.yml | kubectl replace --force -f -
-#if ! kubectl wait deployment demo-db-mysql --for condition=Available=True --timeout=120s
-#  then exit 1
-#fi
+envsubst < db.yml | kubectl replace --force -f -
+if ! kubectl wait deployment demo-db-mysql --for condition=Available=True --timeout=120s
+  then exit 1
+fi
 
 # APP DEPLOYMENT
 envsubst < deployment.yml | kubectl replace --force -f -
