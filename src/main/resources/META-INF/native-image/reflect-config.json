@@ -496,6 +496,13 @@
     "methods":[{"name":"<init>","parameterTypes":[] }]
   },
   {
+    "name": "com.zaxxer.hikari.util.ConcurrentBag$IConcurrentBagEntry[]",
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true,
+    "allDeclaredFields": true,
+    "unsafeAllocated": true
+  },
+  {
     "name" : "com.zaxxer.hikari.util.ConcurrentBag",
     "allDeclaredConstructors" : true,
     "allPublicConstructors" : true,
