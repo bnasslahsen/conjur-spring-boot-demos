@@ -2,6 +2,7 @@ package org.cyberark.conjur.demos.common;
 
 import javax.sql.DataSource;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -13,6 +14,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration(proxyBeanMethods = false)
 @RefreshScope
+@ConditionalOnProperty(name = "conjur.auto-refresh.enabled")
 public class DBPropRefresh {
 	
 	private final DataSourceProperties dataSourceProperties;

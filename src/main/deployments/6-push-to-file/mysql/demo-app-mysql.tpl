@@ -2,12 +2,12 @@ spring:
   profiles:
     active: not-secured
   datasource:
-    url: {{ secret "url" }}
-    username: {{ secret "username" }}
-    password: {{ secret "password" }}
+    url: {{ secret "mysql-url" }}
+    username: {{ secret "mysql-username" }}
+    password: {{ secret "mysql-password" }}
   jpa:
     hibernate:
-      ddl-auto: update   
+      ddl-auto: update    
  
 management:
   endpoints:

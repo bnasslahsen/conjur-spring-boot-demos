@@ -25,7 +25,7 @@ spec:
           - password
           - url
         conjur.org/secret-file-format.demo-app: "template"
-        conjur.org/secret-file-path.demo-app: "./application.yaml"
+        conjur.org/secret-file-path.demo-app: "./application.yml"
         conjur.org/secrets-refresh-interval: 60s
         conjur.org/secrets-refresh-enabled: "true"
     spec:
@@ -45,8 +45,6 @@ spec:
           env:
             - name: SPRING_CONFIG_LOCATION
               value: /opt/secrets/conjur/
-            - name: SPRING_PROFILES_ACTIVE
-              value: not-secured
           # Path to the file with the secrets
           volumeMounts:
             - name: conjur-secrets
@@ -59,6 +57,11 @@ spec:
         - image: cyberark/secrets-provider-for-k8s
           imagePullPolicy: IfNotPresent
           name: configurator
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - /usr/local/bin/conjur-secrets-provided.sh
           env:
             - name: MY_POD_NAMESPACE
               valueFrom:

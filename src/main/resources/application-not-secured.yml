@@ -3,6 +3,9 @@ spring:
     url: jdbc:h2:mem:testdb
     username: sa
     password: test
+  jpa:
+    hibernate:
+      ddl-auto: update
 
 springdoc:
   writer-with-order-by-keys: true

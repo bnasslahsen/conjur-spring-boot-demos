@@ -8,7 +8,9 @@ conjur variable set -i data/bnl/ocp-apps/url -v "jdbc:h2:mem:testdb"
 conjur variable set -i data/bnl/ocp-apps/password -v "sa"
 conjur variable set -i data/bnl/ocp-apps/username -v "test"
 
+conjur variable set -i data/bnl/ocp-apps/mysql-url -v "jdbc:mysql://demo-db-mysql.bnl-demo-app-ns.svc.cluster.local:3306/demo-db"
 conjur variable set -i data/bnl/ocp-apps/mysql-host -v "demo-db-mysql.bnl-demo-app-ns.svc.cluster.local"
 conjur variable set -i data/bnl/ocp-apps/mysql-port -v "3306"
 conjur variable set -i data/bnl/ocp-apps/mysql-username -v "demo-db"
 conjur variable set -i data/bnl/ocp-apps/mysql-password -v "demo-db"
+

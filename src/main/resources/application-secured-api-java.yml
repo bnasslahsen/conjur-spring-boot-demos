@@ -1,3 +1,8 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+
 springdoc:
   writer-with-order-by-keys: true
   swagger-ui:
@@ -13,4 +18,3 @@ app:
 logging:
   level:
     com.cyberark: DEBUG
-    org.cyberark: DEBUG
