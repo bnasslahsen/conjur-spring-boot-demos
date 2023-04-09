@@ -183,10 +183,6 @@
       "locales":[""]
     }, 
     {
-      "name":"org.apache.coyote.http11.filters.LocalStrings",
-      "locales":[""]
-    }, 
-    {
       "name":"org.apache.naming.LocalStrings",
       "locales":[""]
     }, 
