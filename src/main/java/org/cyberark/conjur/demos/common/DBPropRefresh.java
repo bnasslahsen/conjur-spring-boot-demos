@@ -20,6 +20,7 @@ public class DBPropRefresh {
 	private final DataSourceProperties dataSourceProperties;
 
 	public DBPropRefresh(DataSourceProperties dataSourceProperties) {
+		System.out.println("conjur.auto-refresh.enabled");
 		this.dataSourceProperties = dataSourceProperties;
 	}
 
@@ -27,6 +28,7 @@ public class DBPropRefresh {
 	@Bean
 	@RefreshScope
 	public DataSource getDatasource() {
+		System.out.println("conjur.auto-refresh.enabled");
 		return DataSourceBuilder.create().url(dataSourceProperties.getUrl())
 				.username(dataSourceProperties.getUsername())
 				.password(dataSourceProperties.getPassword()).build();
