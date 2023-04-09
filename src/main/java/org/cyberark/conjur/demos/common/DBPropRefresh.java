@@ -11,12 +11,13 @@ import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ScopedProxyMode;
 
 /**
  * @author bnasslahsen
  */
 @Configuration(proxyBeanMethods = false)
-@RefreshScope
+@RefreshScope(proxyMode = ScopedProxyMode.NO)
 @ConditionalOnProperty(name = "conjur.refresh.enabled")
 public class DBPropRefresh {
 
@@ -33,7 +34,7 @@ public class DBPropRefresh {
 
 
 	@Bean
-	@RefreshScope
+	@RefreshScope(proxyMode = ScopedProxyMode.NO)
 	public DataSource getDatasource() {
 		LOGGER.debug("Conjur Refresh Enabled");
 		return DataSourceBuilder.create().url(dataSourceProperties.getUrl())
