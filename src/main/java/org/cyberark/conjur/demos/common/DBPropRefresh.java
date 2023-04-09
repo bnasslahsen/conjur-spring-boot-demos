@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration(proxyBeanMethods = false)
 @RefreshScope
-@ConditionalOnProperty(name = "conjur.auto-refresh.enabled")
+@ConditionalOnProperty(name = "conjur.refresh.enabled")
 public class DBPropRefresh {
 	
 	private final DataSourceProperties dataSourceProperties;
