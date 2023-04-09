@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define MySQL credentials
-POD_NAME=demo-db-mysql-65c5f547b5-jqq2q
+POD_NAME=demo-db-mysql-65c5f547b5-jqq2q 
 
 MYSQL_ROOT_USER=root
 MYSQL_ROOT_PASSWORD=demo-db

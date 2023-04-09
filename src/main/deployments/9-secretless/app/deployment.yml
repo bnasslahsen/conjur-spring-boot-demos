@@ -17,7 +17,7 @@ spec:
     spec:
       serviceAccountName: demo-app-secretless-sa
       containers:
-        - image: bnasslahsen/conjur-spring-boot-demos-mysql
+        - image: bnasslahsen/conjur-spring-boot-demos
           name: demo-app-secretless
           imagePullPolicy: Always
           readinessProbe:

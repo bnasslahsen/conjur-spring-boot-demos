@@ -4,9 +4,10 @@ spring:
       ddl-auto: update
 
 springdoc:
-  writer-with-order-by-keys: true
   swagger-ui:
     use-root-path: true
+    display-request-duration: true
+    tagsSorter: alpha
 
 logging:
   level:

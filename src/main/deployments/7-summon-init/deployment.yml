@@ -20,14 +20,12 @@ spec:
         - name: demo-app-summon-init
           image: bnasslahsen/conjur-spring-boot-demos
           imagePullPolicy: Always
-          command: ["summon", "--provider", "summon-conjur" ,"-f", "/etc/summon/secrets.yml", "java", "-jar", "/app/target/conjur-k8s-demo-3.0.jar" ]
+          command: ["summon", "--provider", "summon-conjur" ,"-f", "/etc/summon/secrets.yml", "java", "-jar", "/app/conjur-spring-boot-demos-1.0.jar" ]
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: not-secured
             - name: CONJUR_AUTHN_TOKEN_FILE
               value: /run/conjur/access-token
-            - name: SPRING_PROFILES_ACTIVE
-              value: summon
           ports:
             - containerPort: 8080
           envFrom:
@@ -41,7 +39,7 @@ spec:
               name: summon-config
               readOnly: true
       initContainers:
-        - image: cyberark/conjur-openshift-authenticator
+        - image: registry.connect.redhat.com/cyberark/conjur-openshift-authenticator
           imagePullPolicy: IfNotPresent
           name: configurator
           volumeMounts:

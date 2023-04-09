@@ -1,0 +1,143 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: demo-app-push-to-file-sidecar
+  name: demo-app-push-to-file-sidecar
+  namespace: $APP_NAMESPACE
+spec:
+  selector:
+    matchLabels:
+      app: demo-app-push-to-file-sidecar
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: demo-app-push-to-file-sidecar
+      annotations:
+        # Secrets Provider configuration
+        conjur.org/container-mode: sidecar
+        conjur.org/secrets-destination: file
+        conjur.org/jwt-token-path: /var/run/secrets/tokens/jwt
+        conjur.org/conjur-secrets-policy-path.demo-app: data/bnl/ocp-apps
+        conjur.org/conjur-secrets.demo-app: |
+          - mysql-username
+          - mysql-password
+          - mysql-url
+        conjur.org/secret-file-format.demo-app: "template"
+        conjur.org/secret-file-path.demo-app: "./application.yml"
+        conjur.org/secrets-refresh-interval: 60s
+        conjur.org/secrets-refresh-enabled: "true"
+    spec:
+      serviceAccountName: demo-app-push-to-file-sidecar-sa
+      containers:
+        - name: demo-app-push-to-file-sidecar
+          image: bnasslahsen/conjur-spring-boot-demos
+          imagePullPolicy: Always
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 8080
+          env:
+            - name: SPRING_CONFIG_LOCATION
+              value: /opt/secrets/conjur/
+            - name: CONJUR_REFRESH_ENABLED
+              value: "true"
+          # Path to the file with the secrets
+          volumeMounts:
+            - name: conjur-secrets
+              mountPath: /opt/secrets/conjur
+              readOnly: true
+            - name: conjur-templates
+              mountPath: /conjur/templates
+          ports:
+            - containerPort: 8080
+        - image: cyberark/secrets-provider-for-k8s
+          imagePullPolicy: IfNotPresent
+          name: configurator
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - /usr/local/bin/conjur-secrets-provided.sh
+          env:
+            - name: MY_POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+          envFrom:
+            - configMapRef:
+                name: conjur-connect
+          livenessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - |
+                  /conjur/status/conjur-secrets-unchanged.sh
+                  if [ "$?" -ne 0 ]; then
+                      wget -q --header="Content-Type: application/json" --post-data='{}' http://localhost:8080/actuator/refresh >/dev/null 2>&1
+                      exit 0
+                  fi
+            failureThreshold: 1
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          volumeMounts:
+            - name: podinfo
+              mountPath: /conjur/podinfo
+            - name: conjur-secrets
+              mountPath: /conjur/secrets
+            - name: conjur-templates
+              mountPath: /conjur/templates
+            - name: jwt-token
+              mountPath: /var/run/secrets/tokens
+      volumes:
+        - name: conjur-templates
+          configMap:
+            name: spring-boot-templates
+        - name: conjur-secrets
+          emptyDir:
+            medium: Memory
+        - name: conjur-status
+          emptyDir:
+            medium: Memory
+        - name: jwt-token
+          projected:
+            sources:
+              - serviceAccountToken:
+                  path: jwt
+                  expirationSeconds: 6000
+                  audience: conjur
+        - emptyDir:
+            medium: Memory
+          name: conjur-access-token
+        - emptyDir:
+            medium: Memory
+          name: conjur-certs
+        - downwardAPI:
+            defaultMode: 420
+            items:
+              - fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.annotations
+                path: annotations
+          name: podinfo
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: demo-app-push-to-file-sidecar
+  namespace: $APP_NAMESPACE
+spec:
+  type: NodePort
+  ports:
+    - port: 8080
+      nodePort: 32099
+  selector:
+    app: demo-app-push-to-file-sidecar

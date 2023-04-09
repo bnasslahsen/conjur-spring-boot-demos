@@ -10,7 +10,7 @@ kubectl delete serviceaccount demo-app-push-to-file-sidecar-sa --ignore-not-foun
 kubectl create serviceaccount demo-app-push-to-file-sidecar-sa
 
 kubectl delete configmap spring-boot-templates --ignore-not-found=true
-kubectl create configmap spring-boot-templates --from-file=demo-app-mysql.tpl
+kubectl create configmap spring-boot-templates --from-file=demo-app.tpl
 
 # DEPLOYMENT
 envsubst < deployment.yml | kubectl replace --force -f -

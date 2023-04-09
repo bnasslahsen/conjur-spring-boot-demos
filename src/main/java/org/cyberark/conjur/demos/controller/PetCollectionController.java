@@ -3,6 +3,7 @@ package org.cyberark.conjur.demos.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.cyberark.conjur.demos.model.Pet;
 import org.cyberark.conjur.demos.repository.PetRepository;
 
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/pets")
+@Tag(name = "Pets")
 class PetCollectionController {
 
 	private final PetRepository repository;
