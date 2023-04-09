@@ -86,7 +86,10 @@
   "bundles":[
     {
       "name":"com.mysql.cj.LocalizedErrorMessages",
-      "locales":["und"]
+      "locales":[
+        "", 
+        "und"
+      ]
     }, 
     {
       "name":"jakarta.servlet.LocalStrings",

@@ -202,7 +202,9 @@
   "queryAllDeclaredMethods":true
 },
 {
-  "name":"com.cyberark.conjur.sdk.AccessToken"
+  "name":"com.cyberark.conjur.sdk.AccessToken",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
   "name":"com.cyberark.conjur.sdk.ApiClient"
@@ -380,6 +382,12 @@
   "name":"com.google.gson.GsonBuilder",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true
+},
+{
+  "name":"com.google.gson.internal.LinkedTreeMap",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true
 },
 {
   "name":"com.mysql.cj.conf.url.SingleConnectionUrl",
@@ -4258,6 +4266,12 @@
   "methods":[{"name":"getGroups","parameterTypes":[] }]
 },
 {
+  "name":"org.springframework.boot.actuate.jdbc.DataSourceHealthIndicator",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"afterPropertiesSet","parameterTypes":[] }]
+},
+{
   "name":"org.springframework.boot.actuate.metrics.data.DefaultRepositoryTagsProvider",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
@@ -6373,6 +6387,9 @@
 {
   "name":"org.springframework.context.annotation.Scope",
   "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.springframework.context.annotation.ScopedProxyMode"
 },
 {
   "name":"org.springframework.context.event.SmartApplicationListener",
