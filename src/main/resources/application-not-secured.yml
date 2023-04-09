@@ -12,3 +12,14 @@ springdoc:
     use-root-path: true
     display-request-duration: true
     tags-sorter: alpha
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, refresh
+
+logging:
+  level:
+    com.cyberark: DEBUG
+    org.cyberark: DEBUG

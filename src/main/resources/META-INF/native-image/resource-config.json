@@ -44,6 +44,12 @@
       "pattern":"\\Q\\E"
     }, 
     {
+      "pattern":"\\Qapplication-secured-api-spring.yml\\E"
+    }, 
+    {
+      "pattern":"\\Qcom/mysql/cj/TlsSettings.properties\\E"
+    }, 
+    {
       "pattern":"\\Qconjur.properties\\E"
     }, 
     {
@@ -96,6 +102,10 @@
     }
   ]},
   "bundles":[
+    {
+      "name":"com.mysql.cj.LocalizedErrorMessages",
+      "locales":[""]
+    }, 
     {
       "name":"jakarta.servlet.LocalStrings",
       "locales":[""]

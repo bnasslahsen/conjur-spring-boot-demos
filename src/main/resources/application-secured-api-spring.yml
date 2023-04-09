@@ -1,7 +1,15 @@
 spring:
+  datasource:
+    username: demo-db
+    password: demo-db
+    url: jdbc:mysql://localhost:3306/demo-db
   jpa:
     hibernate:
       ddl-auto: update
+
+conjur:
+  refresh:
+    enabled: true
 
 springdoc:
   swagger-ui:
@@ -12,3 +20,10 @@ springdoc:
 logging:
   level:
     com.cyberark: DEBUG
+    org.cyberark: DEBUG
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, refresh
