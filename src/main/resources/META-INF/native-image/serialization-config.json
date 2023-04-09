@@ -1,9 +1,5 @@
 {
   "types":[
-    {
-      "name":"org.cyberark.conjur.demos.common.DBPropRefresh$$SpringCGLIB$$0",
-      "customTargetConstructorClass":"java.lang.Object"
-    }
   ],
   "lambdaCapturingTypes":[
   ],
