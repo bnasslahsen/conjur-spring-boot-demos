@@ -27,18 +27,12 @@ cd src/main/conjur
 - Run the application with the following profiles:
   - `not-secured` : For application without any secrets protection
   - `secured-api-spring` : For application with Conjur Spring-Boot plugin
-  - `secured-api-java` : For pure java/Conjur integration
-  - `secured-jwt` : For pure JWT/Spring integration with Conjur
-
 
 ## Test the application outside the IDE:
 ```shell
 ./mvnw clean package
-
-
 ./run.sh not-secured
 ./run.sh secured-api-spring
-./run.sh secured-api-java
 ```
 
 ## Building the Docker images

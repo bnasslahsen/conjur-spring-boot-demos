@@ -17,7 +17,7 @@ openssl s_client -connect "$CONJUR_MASTER_HOSTNAME":"$CONJUR_MASTER_PORT" \
   > conjur.pem
 
 kubectl create configmap conjur-connect-java-api-key \
-  --from-literal SPRING_PROFILES_ACTIVE=secured-api-java \
+  --from-literal SPRING_PROFILES_ACTIVE=secured-api-spring \
   --from-literal CONJUR_AUTHN_API_KEY="$CONJUR_AUTHN_API_KEY"  \
   --from-literal CONJUR_ACCOUNT="$CONJUR_ACCOUNT" \
   --from-literal CONJUR_AUTHN_LOGIN="$CONJUR_AUTHN_LOGIN" \
