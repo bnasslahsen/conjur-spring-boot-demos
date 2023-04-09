@@ -40,6 +40,11 @@
         annotations:
           authn-jwt/demo-cluster/kubernetes.io/namespace: bnl-demo-app-ns
           authn-jwt/demo-cluster/kubernetes.io/serviceaccount/name: demo-app-secretless-sa
+      - !host
+        id: system:serviceaccount:bnl-demo-app-ns:demo-db-mysql-sa
+        annotations:
+          authn-jwt/demo-cluster/kubernetes.io/namespace: bnl-demo-app-ns
+          authn-jwt/demo-cluster/kubernetes.io/serviceaccount/name: demo-db-mysql-sa      
     - !grant
       role: !group
       members: *hosts

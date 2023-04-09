@@ -40,13 +40,14 @@ spec:
               port: 8080
           livenessProbe:
             httpGet:
-              path: /actuator/health/liveness
+              path: /actuator/health
               port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            failureThreshold: 3
           env:
             - name: SPRING_CONFIG_LOCATION
               value: /opt/secrets/conjur/
-            - name: CONJUR_REFRESH_ENABLED
-              value: "true"
           # Path to the file with the secrets
           volumeMounts:
             - name: conjur-secrets
@@ -72,22 +73,6 @@ spec:
           envFrom:
             - configMapRef:
                 name: conjur-connect
-          livenessProbe:
-            exec:
-              command:
-                - sh
-                - -c
-                - |
-                  /conjur/status/conjur-secrets-unchanged.sh
-                  if [ "$?" -ne 0 ]; then
-                      wget -q --header="Content-Type: application/json" --post-data='{}' http://localhost:8080/actuator/refresh >/dev/null 2>&1
-                      exit 0
-                  fi
-            failureThreshold: 1
-            initialDelaySeconds: 5
-            periodSeconds: 5
-            successThreshold: 1
-            timeoutSeconds: 1
           volumeMounts:
             - name: podinfo
               mountPath: /conjur/podinfo
@@ -138,6 +123,6 @@ spec:
   type: NodePort
   ports:
     - port: 8080
-      nodePort: 32099
+      nodePort: 32092
   selector:
     app: demo-app-push-to-file-sidecar

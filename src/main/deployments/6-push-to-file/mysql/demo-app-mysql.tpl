@@ -17,6 +17,7 @@ management:
 
 springdoc:
   writer-with-order-by-keys: true
+  show-actuator: true
   swagger-ui:
     use-root-path: true
     

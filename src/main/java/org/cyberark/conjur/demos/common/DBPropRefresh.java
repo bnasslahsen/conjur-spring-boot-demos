@@ -2,6 +2,9 @@ package org.cyberark.conjur.demos.common;
 
 import javax.sql.DataSource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
@@ -16,11 +19,15 @@ import org.springframework.context.annotation.Configuration;
 @RefreshScope
 @ConditionalOnProperty(name = "conjur.refresh.enabled")
 public class DBPropRefresh {
+
+	/**
+	 * The constant LOGGER.
+	 */
+	private static final Logger LOGGER = LoggerFactory.getLogger(DBPropRefresh.class);
 	
 	private final DataSourceProperties dataSourceProperties;
 
 	public DBPropRefresh(DataSourceProperties dataSourceProperties) {
-		System.out.println("conjur.auto-refresh.enabled");
 		this.dataSourceProperties = dataSourceProperties;
 	}
 
@@ -28,7 +35,7 @@ public class DBPropRefresh {
 	@Bean
 	@RefreshScope
 	public DataSource getDatasource() {
-		System.out.println("conjur.auto-refresh.enabled");
+		LOGGER.debug("Conjur Refresh Enabled");
 		return DataSourceBuilder.create().url(dataSourceProperties.getUrl())
 				.username(dataSourceProperties.getUsername())
 				.password(dataSourceProperties.getPassword()).build();
