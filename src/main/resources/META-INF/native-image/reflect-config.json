@@ -394,6 +394,10 @@
   "methods":[{"name":"<init>","parameterTypes":["com.mysql.cj.conf.ConnectionUrlParser","java.util.Properties"] }]
 },
 {
+  "name":"com.mysql.cj.exceptions.CJException",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.String"] }]
+},
+{
   "name":"com.mysql.cj.jdbc.AbandonedConnectionCleanupThread"
 },
 {
@@ -401,8 +405,20 @@
   "methods":[{"name":"free","parameterTypes":[] }]
 },
 {
+  "name":"com.mysql.cj.jdbc.ConnectionImpl"
+},
+{
   "name":"com.mysql.cj.jdbc.Driver",
   "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.mysql.cj.jdbc.NonRegisteringDriver"
+},
+{
+  "name":"com.mysql.cj.jdbc.exceptions.SQLError"
+},
+{
+  "name":"com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping"
 },
 {
   "name":"com.mysql.cj.log.StandardLogger",
@@ -621,8 +637,14 @@
   ]
 },
 {
+  "name":"com.zaxxer.hikari.pool.HikariPool"
+},
+{
   "name":"com.zaxxer.hikari.pool.HikariProxyConnection",
   "methods":[{"name":"getSchema","parameterTypes":[] }]
+},
+{
+  "name":"com.zaxxer.hikari.pool.PoolBase"
 },
 {
   "name":"com.zaxxer.hikari.util.ConcurrentBag$IConcurrentBagEntry[]",
@@ -630,6 +652,9 @@
   "allDeclaredMethods":true,
   "allDeclaredConstructors":true,
   "unsafeAllocated":true
+},
+{
+  "name":"com.zaxxer.hikari.util.DriverDataSource"
 },
 {
   "name":"io.micrometer.common.lang.NonNullApi",
@@ -1673,6 +1698,9 @@
 },
 {
   "name":"java.lang.Void",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
   "fields":[{"name":"TYPE"}]
 },
 {
@@ -1969,6 +1997,9 @@
 {
   "name":"java.util.Map",
   "queryAllDeclaredMethods":true
+},
+{
+  "name":"java.util.Optional"
 },
 {
   "name":"java.util.PropertyPermission",
@@ -2467,7 +2498,9 @@
   "queryAllDeclaredMethods":true,
   "methods":[
     {"name":"<init>","parameterTypes":["org.cyberark.conjur.demos.repository.PetRepository"] }, 
-    {"name":"createPet","parameterTypes":["org.cyberark.conjur.demos.model.Pet"] }
+    {"name":"createPet","parameterTypes":["org.cyberark.conjur.demos.model.Pet"] }, 
+    {"name":"deletePet","parameterTypes":["java.lang.Long"] }, 
+    {"name":"getPet","parameterTypes":["java.lang.Long"] }
   ]
 },
 {
@@ -2587,8 +2620,20 @@
   "queryAllPublicMethods":true
 },
 {
+  "name":"org.hibernate.boot.internal.InFlightMetadataCollectorImpl"
+},
+{
   "name":"org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy",
   "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.hibernate.boot.model.process.spi.MetadataBuildingProcess"
+},
+{
+  "name":"org.hibernate.boot.model.relational.Database"
+},
+{
+  "name":"org.hibernate.boot.registry.internal.StandardServiceRegistryImpl"
 },
 {
   "name":"org.hibernate.bytecode.internal.bytebuddy.BytecodeProviderImpl",
@@ -2630,6 +2675,12 @@
 {
   "name":"org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentImpl",
   "queryAllPublicMethods":true
+},
+{
+  "name":"org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator"
+},
+{
+  "name":"org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess"
 },
 {
   "name":"org.hibernate.engine.jdbc.internal.JdbcServicesImpl",
@@ -2680,6 +2731,9 @@
 {
   "name":"org.hibernate.internal.EntityManagerMessageLogger_$logger",
   "methods":[{"name":"<init>","parameterTypes":["org.jboss.logging.Logger"] }]
+},
+{
+  "name":"org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl"
 },
 {
   "name":"org.hibernate.metamodel.mapping.MappingModelCreationLogger_$logger",
@@ -2763,6 +2817,9 @@
   "name":"org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorBuilderImpl",
   "queryAllPublicMethods":true,
   "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.hibernate.service.internal.AbstractServiceRegistryImpl"
 },
 {
   "name":"org.hibernate.service.internal.SessionFactoryServiceRegistryFactoryImpl",
@@ -3297,7 +3354,8 @@
 {
   "name":"org.springdoc.webmvc.ui.SwaggerWelcomeWebMvc",
   "allDeclaredFields":true,
-  "queryAllDeclaredMethods":true
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"redirectToUi","parameterTypes":["jakarta.servlet.http.HttpServletRequest"] }]
 },
 {
   "name":"org.springframework.aop.SpringProxy",
@@ -4660,6 +4718,7 @@
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
   "methods":[
+    {"name":"<init>","parameterTypes":[] }, 
     {"name":"afterPropertiesSet","parameterTypes":[] }, 
     {"name":"setBeanClassLoader","parameterTypes":["java.lang.ClassLoader"] }, 
     {"name":"setPassword","parameterTypes":["java.lang.String"] }, 
@@ -5122,7 +5181,10 @@
   "name":"org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
-  "methods":[{"name":"error","parameterTypes":["jakarta.servlet.http.HttpServletRequest"] }]
+  "methods":[
+    {"name":"error","parameterTypes":["jakarta.servlet.http.HttpServletRequest"] }, 
+    {"name":"errorHtml","parameterTypes":["jakarta.servlet.http.HttpServletRequest","jakarta.servlet.http.HttpServletResponse"] }
+  ]
 },
 {
   "name":"org.springframework.boot.autoconfigure.web.servlet.error.DefaultErrorViewResolver",
@@ -6392,6 +6454,9 @@
   "name":"org.springframework.context.annotation.ScopedProxyMode"
 },
 {
+  "name":"org.springframework.context.aot.AotApplicationContextInitializer"
+},
+{
   "name":"org.springframework.context.event.SmartApplicationListener",
   "queryAllDeclaredMethods":true,
   "queryAllPublicMethods":true,
@@ -6617,7 +6682,9 @@
   "queryAllDeclaredConstructors":true,
   "methods":[
     {"name":"<init>","parameterTypes":["org.springframework.data.jpa.repository.support.JpaEntityInformation","jakarta.persistence.EntityManager"] }, 
+    {"name":"delete","parameterTypes":["java.lang.Object"] }, 
     {"name":"findAll","parameterTypes":[] }, 
+    {"name":"findById","parameterTypes":["java.lang.Object"] }, 
     {"name":"save","parameterTypes":["java.lang.Object"] }
   ]
 },
@@ -7330,6 +7397,9 @@
   ]
 },
 {
+  "name":"org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider"
+},
+{
   "name":"org.springframework.scheduling.SchedulingTaskExecutor",
   "queryAllDeclaredMethods":true,
   "queryAllPublicMethods":true,
@@ -7504,6 +7574,9 @@
 },
 {
   "name":"org.springframework.util.Assert"
+},
+{
+  "name":"org.springframework.util.ClassUtils"
 },
 {
   "name":"org.springframework.util.CustomizableThreadCreator",
@@ -8234,6 +8307,14 @@
   ]
 },
 {
+  "name":"org.springframework.web.servlet.view.AbstractUrlBasedView",
+  "allDeclaredFields":true
+},
+{
+  "name":"org.springframework.web.servlet.view.AbstractView",
+  "allDeclaredFields":true
+},
+{
   "name":"org.springframework.web.servlet.view.BeanNameViewResolver",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
@@ -8257,6 +8338,10 @@
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
   "methods":[{"name":"getViewName","parameterTypes":["jakarta.servlet.http.HttpServletRequest"] }]
+},
+{
+  "name":"org.springframework.web.servlet.view.InternalResourceView",
+  "allDeclaredFields":true
 },
 {
   "name":"org.springframework.web.servlet.view.InternalResourceViewResolver",

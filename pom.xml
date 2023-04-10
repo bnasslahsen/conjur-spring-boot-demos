@@ -19,7 +19,6 @@
 		<springdoc.version>2.1.0</springdoc.version>
 		<conjur-sdk-springboot.version>0.0.1-SNAPSHOT</conjur-sdk-springboot.version>
 		<spring-cloud.version>2022.0.2</spring-cloud.version>
-		<mysql.version>8.0.31</mysql.version>
 	</properties>
 
 	<dependencyManagement>
@@ -93,7 +92,6 @@
 		<dependency>
 			<groupId>com.mysql</groupId>
 			<artifactId>mysql-connector-j</artifactId>
-			<version>${mysql.version}</version>
 			<scope>runtime</scope>
 		</dependency>
 	</dependencies>
@@ -106,9 +104,9 @@
 				<configuration>
 					<image>
 						<name>
-							docker.io/bnasslahsen/${project.artifactId}
+							docker.io/bnasslahsen/${project.artifactId}-native
 						</name>
-						<tags><tag>docker.io/bnasslahsen/${project.artifactId}:${project.version}</tag></tags>
+						<tags><tag>docker.io/bnasslahsen/${project.artifactId}-native:${project.version}</tag></tags>
 						<publish>true</publish>
 						<pullPolicy>IF_NOT_PRESENT</pullPolicy>
 					</image>

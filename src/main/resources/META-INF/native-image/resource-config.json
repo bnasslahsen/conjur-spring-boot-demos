@@ -8,6 +8,15 @@
       "pattern":"\\QMETA-INF/resources/webjars/swagger-ui/4.18.2/swagger-initializer.js\\E"
     }, 
     {
+      "pattern":"\\QMETA-INF/resources/webjars/swagger-ui/4.18.2/swagger-ui-bundle.js\\E"
+    }, 
+    {
+      "pattern":"\\QMETA-INF/resources/webjars/swagger-ui/4.18.2/swagger-ui-standalone-preset.js\\E"
+    }, 
+    {
+      "pattern":"\\QMETA-INF/resources/webjars/swagger-ui/4.18.2/swagger-ui.css\\E"
+    }, 
+    {
       "pattern":"\\QMETA-INF/services/ch.qos.logback.classic.spi.Configurator\\E"
     }, 
     {
@@ -78,6 +87,12 @@
     }, 
     {
       "pattern":"\\Qorg/springframework/boot/autoconfigure/transaction/TransactionAutoConfiguration$EnableTransactionManagementConfiguration$CglibAutoProxyConfiguration.class\\E"
+    }, 
+    {
+      "pattern":"\\Qorg/springframework/boot/web/server/mime-mappings.properties\\E"
+    }, 
+    {
+      "pattern":"\\Qorg/springframework/web/util/HtmlCharacterEntityReferences.properties\\E"
     }, 
     {
       "pattern":"\\Qspringdoc.config.properties\\E"
