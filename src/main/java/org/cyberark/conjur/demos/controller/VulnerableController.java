@@ -79,7 +79,6 @@ class VulnerableController {
 		properties.put("dbUrl", dataSourceProperties.getUrl());
 		properties.put("dbUsername", dataSourceProperties.getUsername());
 		properties.put("dbPassword", dataSourceProperties.getPassword());
-
 		ObjectWriter writer = objectMapper.writer().with(SerializationFeature.INDENT_OUTPUT);
 		String json = writer.writeValueAsString(properties);
 		return ResponseEntity.ok().body(json);

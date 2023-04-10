@@ -19,7 +19,6 @@ spec:
       containers:
         - name: demo-app-jwt
           image: bnasslahsen/conjur-spring-boot-demos-native
-          imagePullPolicy: IfNotPresent
           readinessProbe:
             httpGet:
               path: /actuator/health

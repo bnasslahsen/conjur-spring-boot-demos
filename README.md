@@ -80,10 +80,17 @@ cd src/main/deployments/5-secrets-provider-sidecar
 ```
 
 - For Push to File with Sidecar container:
+  - To test with H2:
 ```shell
-To test with H2
-cd src/main/deployments/6-push-to-file
-  ./deploy-app.sh
+cd src/main/deployments/6-push-to-file/h2
+./deploy-app.sh
+./deploy-app-refresh.sh
+```
+  - To test with MySQL:
+```shell
+cd src/main/deployments/6-push-to-file/mysql
+./deploy-app.sh
+./deploy-app-refresh.sh
 ```
 
 - For Summon with Init Container:

@@ -18,16 +18,16 @@ import org.springframework.context.annotation.Configuration;
 @Configuration(proxyBeanMethods = false)
 @RefreshScope
 @ConditionalOnProperty(name = "conjur.refresh.enabled")
-public class DBPropRefresh {
+public class RefreshableDatasource {
 
 	/**
 	 * The constant LOGGER.
 	 */
-	private static final Logger LOGGER = LoggerFactory.getLogger(DBPropRefresh.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(RefreshableDatasource.class);
 	
 	private final DataSourceProperties dataSourceProperties;
 
-	public DBPropRefresh(DataSourceProperties dataSourceProperties) {
+	public RefreshableDatasource(DataSourceProperties dataSourceProperties) {
 		this.dataSourceProperties = dataSourceProperties;
 	}
 

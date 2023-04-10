@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # Define MySQL credentials
-POD_NAME=demo-db-mysql-65c5f547b5-5cmkj
+POD_NAME=demo-db-mysql-65c5f547b5-c4ctp
 
 MYSQL_ROOT_USER=root
 MYSQL_ROOT_PASSWORD=demo-db
 MYSQL_USER=demo-db
-NEW_PASSWORD=demo-db4
+NEW_PASSWORD=demo-db11
 
 
 # Connect to MySQL and update password

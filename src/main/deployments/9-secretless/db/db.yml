@@ -45,7 +45,6 @@ spec:
             timeoutSeconds: 2
       initContainers:
         - image: cyberark/secrets-provider-for-k8s
-          imagePullPolicy: IfNotPresent
           name: configurator
           volumeMounts:
             - name: conjur-status

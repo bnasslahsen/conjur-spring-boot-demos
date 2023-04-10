@@ -19,7 +19,6 @@ spec:
       containers:
         - image: bnasslahsen/conjur-spring-boot-demos-native
           name: demo-app-secretless
-          imagePullPolicy: IfNotPresent
           readinessProbe:
             httpGet:
               path: /actuator/health
@@ -35,7 +34,6 @@ spec:
             - containerPort: 8080
         - name: configurator
           image: cyberark/secretless-broker
-          imagePullPolicy: IfNotPresent
           args: ["-f", "/etc/secretless/secretless.yml"]
           ports:
             - containerPort: 3306

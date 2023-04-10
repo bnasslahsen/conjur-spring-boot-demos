@@ -19,7 +19,6 @@ spec:
       containers:
         - name: demo-app-secrets-provider-init
           image: bnasslahsen/conjur-spring-boot-demos-native
-          imagePullPolicy: IfNotPresent
           env:
             - name: DB_USERNAME
               valueFrom:
@@ -40,7 +39,6 @@ spec:
             - containerPort: 8080
       initContainers:
         - image: cyberark/secrets-provider-for-k8s
-          imagePullPolicy: IfNotPresent
           name: configurator
           volumeMounts:
             - name: conjur-status

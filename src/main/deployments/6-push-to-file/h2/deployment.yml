@@ -32,8 +32,8 @@ spec:
       serviceAccountName: demo-app-push-to-file-sidecar-sa
       containers:
         - name: demo-app-push-to-file-sidecar
-          image: bnasslahsen/conjur-spring-boot-demos-native
-          imagePullPolicy: IfNotPresent
+          image: bnasslahsen/conjur-spring-boot-demos
+          imagePullPolicy: Always
           readinessProbe:
             httpGet:
               path: /actuator/health
@@ -55,7 +55,6 @@ spec:
           ports:
             - containerPort: 8080
         - image: cyberark/secrets-provider-for-k8s
-          imagePullPolicy: IfNotPresent
           name: configurator
           lifecycle:
             postStart:
@@ -120,6 +119,6 @@ spec:
   type: NodePort
   ports:
     - port: 8080
-      nodePort: 32092
+      nodePort: 32052
   selector:
     app: demo-app-push-to-file-sidecar
