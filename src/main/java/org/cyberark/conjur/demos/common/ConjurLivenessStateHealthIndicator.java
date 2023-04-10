@@ -36,11 +36,12 @@ public class ConjurLivenessStateHealthIndicator extends LivenessStateHealthIndic
 		try {
 			Process p = pb.start();
 			int exitCode = p.waitFor();
-			LOGGER.debug("exitCode: " + exitCode);
 			if (exitCode == 0) {
+				LOGGER.debug("No password change");
 				return false;
 			}
 			else {
+				LOGGER.debug("Password Change detected");
 				return true;
 			}
 		}
