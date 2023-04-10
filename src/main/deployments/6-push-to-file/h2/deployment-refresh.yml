@@ -26,7 +26,7 @@ spec:
           - url
         conjur.org/secret-file-format.demo-app: "template"
         conjur.org/secret-file-path.demo-app: "./application.yml"
-        conjur.org/secrets-refresh-interval: 60s
+        conjur.org/secrets-refresh-interval: 20s
         conjur.org/secrets-refresh-enabled: "true"
     spec:
       serviceAccountName: demo-app-push-to-file-sidecar-sa

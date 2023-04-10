@@ -26,13 +26,13 @@ spec:
           - mysql-url
         conjur.org/secret-file-format.demo-app: "template"
         conjur.org/secret-file-path.demo-app: "./application.yml"
-        conjur.org/secrets-refresh-interval: 60s
+        conjur.org/secrets-refresh-interval: 20s
         conjur.org/secrets-refresh-enabled: "true"
     spec:
       serviceAccountName: demo-app-push-to-file-sidecar-sa
       containers:
         - name: demo-app-push-to-file-sidecar
-          image: bnasslahsen/conjur-spring-boot-demos-native
+          image: bnasslahsen/conjur-spring-boot-demos
           imagePullPolicy: IfNotPresent
           readinessProbe:
             httpGet:
@@ -42,9 +42,14 @@ spec:
             httpGet:
               path: /actuator/health
               port: 8080
+            failureThreshold: 1
+            initialDelaySeconds: 30
+            periodSeconds: 5
           env:
             - name: SPRING_CONFIG_LOCATION
               value: /opt/secrets/conjur/application.yml
+            - name: CONJUR_DETECT_CHANGE
+              value: "true"
           # Path to the file with the secrets
           volumeMounts:
             - name: conjur-secrets
@@ -52,6 +57,8 @@ spec:
               readOnly: true
             - name: conjur-templates
               mountPath: /conjur/templates
+            - mountPath: /conjur/status
+              name: conjur-status
           ports:
             - containerPort: 8080
         - image: cyberark/secrets-provider-for-k8s
@@ -79,6 +86,8 @@ spec:
               mountPath: /conjur/templates
             - name: jwt-token
               mountPath: /var/run/secrets/tokens
+            - mountPath: /conjur/status
+              name: conjur-status
       volumes:
         - name: conjur-templates
           configMap:
