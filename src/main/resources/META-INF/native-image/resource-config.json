@@ -41,7 +41,7 @@
       "pattern":"\\Qapplication-not-secured.yml\\E"
     }, 
     {
-      "pattern":"\\Qapplication-secured-api-spring.yml\\E"
+      "pattern":"\\Qapplication-secured.yml\\E"
     }, 
     {
       "pattern":"\\Qcom/mysql/cj/TlsSettings.properties\\E"

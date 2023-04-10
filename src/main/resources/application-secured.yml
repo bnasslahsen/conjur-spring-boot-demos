@@ -3,10 +3,6 @@ spring:
     hibernate:
       ddl-auto: update
 
-conjur:
-  refresh:
-    enabled: true
-
 springdoc:
   swagger-ui:
     use-root-path: true

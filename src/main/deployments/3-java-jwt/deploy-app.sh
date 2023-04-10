@@ -17,7 +17,7 @@ openssl s_client -connect "$CONJUR_MASTER_HOSTNAME":"$CONJUR_MASTER_PORT" \
   > conjur.pem
 
 kubectl create configmap conjur-connect-spring-jwt \
-  --from-literal SPRING_PROFILES_ACTIVE=secured-api-spring \
+  --from-literal SPRING_PROFILES_ACTIVE=secured \
   --from-literal CONJUR_ACCOUNT="$CONJUR_ACCOUNT" \
   --from-literal CONJUR_APPLIANCE_URL="$CONJUR_APPLIANCE_URL"  \
   --from-literal CONJUR_AUTHENTICATOR_ID="demo-cluster"  \

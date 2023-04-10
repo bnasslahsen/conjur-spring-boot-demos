@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Profile;
 /**
  * @author bnasslahsen
  */
-@Profile("secured-api-spring")
+@Profile("secured")
 @Primary
 @Configuration(proxyBeanMethods=false)
 @ConfigurationProperties(prefix = "spring.datasource")
