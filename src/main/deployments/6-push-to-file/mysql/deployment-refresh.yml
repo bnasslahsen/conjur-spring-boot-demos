@@ -40,11 +40,11 @@ spec:
               port: 8080
           livenessProbe:
             httpGet:
-              path: /actuator/health/liveness
+              path: /actuator/health
               port: 8080
           env:
             - name: SPRING_CONFIG_LOCATION
-              value: /opt/secrets/conjur/
+              value: /opt/secrets/conjur/application.yml
             - name: CONJUR_REFRESH_ENABLED
               value: "true"
           # Path to the file with the secrets

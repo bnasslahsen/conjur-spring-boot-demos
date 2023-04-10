@@ -47,7 +47,7 @@ spec:
             failureThreshold: 3
           env:
             - name: SPRING_CONFIG_LOCATION
-              value: /opt/secrets/conjur/
+              value: /opt/secrets/conjur/application.yml
           # Path to the file with the secrets
           volumeMounts:
             - name: conjur-secrets
