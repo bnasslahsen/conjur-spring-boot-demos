@@ -28,6 +28,8 @@ spec:
             httpGet:
               path: /actuator/health
               port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 5
           envFrom:
             - configMapRef:
                 name: conjur-connect-secretless
