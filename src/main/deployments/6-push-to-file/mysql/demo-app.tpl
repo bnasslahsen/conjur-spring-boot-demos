@@ -1,6 +1,4 @@
 spring:
-  profiles:
-    active: not-secured
   datasource:
     url: {{ secret "mysql-url" }}
     username: {{ secret "mysql-username" }}

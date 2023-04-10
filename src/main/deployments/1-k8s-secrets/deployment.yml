@@ -29,8 +29,6 @@ spec:
               path: /actuator/health
               port: 8080
           env:
-            - name: SPRING_PROFILES_ACTIVE
-              value: not-secured
             - name: DB_URL
               valueFrom:
                 secretKeyRef:

@@ -38,7 +38,7 @@
       "pattern":"\\Q\\E"
     }, 
     {
-      "pattern":"\\Qapplication-not-secured.yml\\E"
+      "pattern":"\\Qapplication.yml\\E"
     }, 
     {
       "pattern":"\\Qapplication-secured.yml\\E"

@@ -22,8 +22,6 @@ spec:
           imagePullPolicy: Always
           command: ["summon", "--provider", "summon-conjur" ,"-f", "/etc/summon/secrets.yml", "java", "-jar", "/app/conjur-spring-boot-demos-1.0.jar" ]
           env:
-            - name: SPRING_PROFILES_ACTIVE
-              value: not-secured
             - name: CONJUR_AUTHN_TOKEN_FILE
               value: /run/conjur/access-token
           ports:
