@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -19,6 +20,7 @@
 		<springdoc.version>2.1.0</springdoc.version>
 		<conjur-sdk-springboot.version>0.0.1-SNAPSHOT</conjur-sdk-springboot.version>
 		<spring-cloud.version>2022.0.2</spring-cloud.version>
+		<image.name>${project.artifactId}</image.name>
 	</properties>
 
 	<dependencyManagement>
@@ -32,7 +34,7 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -76,7 +78,7 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -104,9 +106,13 @@
 				<configuration>
 					<image>
 						<name>
-							docker.io/bnasslahsen/${project.artifactId}-native
+							docker.io/bnasslahsen/${image.name}
 						</name>
-						<tags><tag>docker.io/bnasslahsen/${project.artifactId}-native:${project.version}</tag></tags>
+						<tags>
+							<tag>docker.io/bnasslahsen/${image.name}:${project.version}
+							</tag>
+						</tags>
+						<runImage>docker.io/bnasslahsen/run:small-cnb</runImage>
 						<publish>true</publish>
 						<pullPolicy>IF_NOT_PRESENT</pullPolicy>
 					</image>
@@ -121,5 +127,13 @@
 			</plugin>
 		</plugins>
 	</build>
-	
+
+	<profiles>
+		<profile>
+			<id>native</id>
+			<properties>
+				<image.name>${project.artifactId}-native</image.name>
+			</properties>
+		</profile>
+	</profiles>
 </project>

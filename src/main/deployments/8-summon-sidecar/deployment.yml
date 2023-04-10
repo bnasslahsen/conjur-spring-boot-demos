@@ -18,9 +18,8 @@ spec:
       serviceAccountName: demo-app-summon-sidecar-sa
       containers:
         - name: demo-app-summon-sidecar
-          image: bnasslahsen/conjur-spring-boot-demos
-          imagePullPolicy: Always
-          command: [ "summon", "--provider", "summon-conjur" ,"-f", "/etc/summon/secrets.yml", "java", "-jar", "/app/conjur-spring-boot-demos-1.0.jar"]
+          image: bnasslahsen/conjur-spring-boot-demos-summon
+          imagePullPolicy: IfNotPresent
           env:
             - name: CONJUR_AUTHN_TOKEN_FILE
               value: /run/conjur/access-token

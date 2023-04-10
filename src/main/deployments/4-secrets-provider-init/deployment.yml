@@ -18,7 +18,7 @@ spec:
       serviceAccountName: demo-app-secrets-provider-init-sa
       containers:
         - name: demo-app-secrets-provider-init
-          image: bnasslahsen/conjur-spring-boot-demos
+          image: bnasslahsen/conjur-spring-boot-demos-native
           imagePullPolicy: IfNotPresent
           env:
             - name: DB_USERNAME

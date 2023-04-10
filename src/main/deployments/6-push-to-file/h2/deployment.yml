@@ -32,8 +32,8 @@ spec:
       serviceAccountName: demo-app-push-to-file-sidecar-sa
       containers:
         - name: demo-app-push-to-file-sidecar
-          image: bnasslahsen/conjur-spring-boot-demos
-          imagePullPolicy: Always
+          image: bnasslahsen/conjur-spring-boot-demos-native
+          imagePullPolicy: IfNotPresent
           readinessProbe:
             httpGet:
               path: /actuator/health

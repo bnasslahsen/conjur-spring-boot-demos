@@ -38,10 +38,13 @@ cd src/main/conjur
 ## Building the Docker images
 - Build the `conjur-spring-boot-demos`
 ```shell
-./mvnw clean package
-podman build --arch=amd64 -t conjur-spring-boot-demos .
-OR 
-./mvnw spring-boot:build-image
+./mvnw clean spring-boot:build-image
+
+## For Native images
+./mvnw -Pnative clean spring-boot:build-image
+
+## For summon
+podman build --arch=amd64 -f src/main/conjur/summon/Dockerfile -t conjur-spring-boot-demos-summon .
 ```
 
 ## Deploy to k8s
@@ -78,6 +81,7 @@ cd src/main/deployments/5-secrets-provider-sidecar
 
 - For Push to File with Sidecar container:
 ```shell
+To test with H2
 cd src/main/deployments/6-push-to-file
   ./deploy-app.sh
 ```
@@ -95,8 +99,14 @@ cd src/main/deployments/8-summon-sidecar
 ```
 
 - For Secretless:
+To deploy the DB:
 ```shell
-cd src/main/deployments/9-secretless
+cd src/main/deployments/9-secretless/db
+  ./deploy-app.sh
+```
+To deploy the App:
+```shell
+cd src/main/deployments/9-secretless/app
   ./deploy-app.sh
 ```
 

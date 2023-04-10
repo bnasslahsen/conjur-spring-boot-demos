@@ -10,6 +10,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -91,6 +92,7 @@ class VulnerableController {
 	 * @throws JsonProcessingException the json processing exception
 	 */
 	@GetMapping("/secrets")
+	@Hidden
 	public ResponseEntity<String> getSecrets() throws JsonProcessingException {
 		Map<String, String> response;
 		try {
