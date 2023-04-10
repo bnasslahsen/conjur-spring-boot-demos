@@ -11,6 +11,8 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 
 /**
+ * The type Conjur spring db config.
+ *
  * @author bnasslahsen
  */
 @Profile("secured")
@@ -20,13 +22,22 @@ import org.springframework.context.annotation.Profile;
 @ConjurPropertySource(value={"data/bnl/ocp-apps/"})
 public class ConjurSpringDbConfig extends DataSourceProperties {
 
-    @Value("${url}")
+	/**
+	 * The Url.
+	 */
+	@Value("${url}")
 	private byte[] url;
-	
-    @Value("${username}")
+
+	/**
+	 * The Username.
+	 */
+	@Value("${username}")
     private byte[] username;
 
-    @ConjurValue(key="data/bnl/ocp-apps/password")
+	/**
+	 * The Password.
+	 */
+	@ConjurValue(key="data/bnl/ocp-apps/password")
     private byte[] password;
 
     @Override
