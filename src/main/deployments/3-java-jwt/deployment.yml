@@ -18,6 +18,7 @@ spec:
       serviceAccountName: demo-app-jwt-sa
       containers:
         - name: demo-app-jwt
+          imagePullPolicy: IfNotPresent
           image: bnasslahsen/conjur-spring-boot-demos-native
           readinessProbe:
             httpGet:

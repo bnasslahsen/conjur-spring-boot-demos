@@ -18,6 +18,7 @@ spec:
       serviceAccountName: demo-app-secrets-provider-init-sa
       containers:
         - name: demo-app-secrets-provider-init
+          imagePullPolicy: IfNotPresent
           image: bnasslahsen/conjur-spring-boot-demos-native
           env:
             - name: DB_USERNAME
@@ -40,6 +41,7 @@ spec:
       initContainers:
         - image: cyberark/secrets-provider-for-k8s
           name: configurator
+          imagePullPolicy: IfNotPresent
           volumeMounts:
             - name: conjur-status
               mountPath: /conjur/status

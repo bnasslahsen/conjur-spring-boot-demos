@@ -18,6 +18,7 @@ spec:
       serviceAccountName: demo-app-summon-sidecar-sa
       containers:
         - name: demo-app-summon-sidecar
+          imagePullPolicy: IfNotPresent
           image: bnasslahsen/conjur-spring-boot-demos-summon
           env:
             - name: CONJUR_AUTHN_TOKEN_FILE
@@ -36,6 +37,7 @@ spec:
               readOnly: true
         - image: registry.connect.redhat.com/cyberark/conjur-openshift-authenticator
           name: configurator
+          imagePullPolicy: IfNotPresent
           volumeMounts:
             - mountPath: /run/conjur
               name: conjur-access-token

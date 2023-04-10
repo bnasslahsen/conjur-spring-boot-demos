@@ -18,6 +18,7 @@ spec:
       serviceAccountName: demo-app-sa
       containers:
         - name: demo-app
+          imagePullPolicy: IfNotPresent
           image: bnasslahsen/conjur-spring-boot-demos-native
           readinessProbe:
             httpGet:

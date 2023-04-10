@@ -22,6 +22,7 @@ spec:
       serviceAccountName: demo-app-secrets-provider-sidecar-sa
       containers:
         - name: demo-app-secrets-provider-sidecar
+          imagePullPolicy: IfNotPresent
           image: bnasslahsen/conjur-spring-boot-demos-native
           env:
             - name: DB_USERNAME
@@ -43,6 +44,7 @@ spec:
             - containerPort: 8080
         - image: cyberark/secrets-provider-for-k8s
           name: configurator
+          imagePullPolicy: IfNotPresent
           volumeMounts:
             - name: conjur-status
               mountPath: /conjur/status

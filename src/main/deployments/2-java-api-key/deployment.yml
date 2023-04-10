@@ -18,6 +18,7 @@ spec:
       serviceAccountName: demo-app-api-key-sa
       containers:
         - name: demo-app-api-key
+          imagePullPolicy: IfNotPresent
           image: bnasslahsen/conjur-spring-boot-demos-native
           readinessProbe:
             httpGet:

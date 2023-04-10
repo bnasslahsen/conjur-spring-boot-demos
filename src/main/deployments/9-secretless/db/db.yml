@@ -21,6 +21,7 @@ spec:
       containers:
         - image: docker.io/mysql:5.7
           name: demo-db-mysql
+          imagePullPolicy: IfNotPresent
           env:
             - name: MYSQL_ROOT_PASSWORD
               value: demo-db
@@ -46,6 +47,7 @@ spec:
       initContainers:
         - image: cyberark/secrets-provider-for-k8s
           name: configurator
+          imagePullPolicy: IfNotPresent
           volumeMounts:
             - name: conjur-status
               mountPath: /conjur/status
