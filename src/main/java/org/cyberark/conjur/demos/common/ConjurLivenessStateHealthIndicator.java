@@ -30,7 +30,7 @@ public class ConjurLivenessStateHealthIndicator implements HealthIndicator {
 				return Health.up().build();
 			} else {
 				LOGGER.debug("Password Change detected");
-				return Health.down().withDetail("exitCode", exitCode).build();
+				return Health.outOfService().withDetail("exitCode", exitCode).build();
 			}
 		} catch (IOException | InterruptedException e) {
 			LOGGER.error(e.getMessage(), e);
