@@ -1,3 +1,3 @@
 - !grant
-  role: !group conjur/authn-jwt/demo-cluster/apps
+  role: !group conjur/authn-jwt/$CONJUR_AUTHENTICATOR_ID/apps
   member: !group /data/bnl/ocp-apps

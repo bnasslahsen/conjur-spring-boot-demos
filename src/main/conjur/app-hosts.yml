@@ -8,43 +8,43 @@
       - !host
         id: system:serviceaccount:bnl-demo-app-ns:demo-app-jwt-sa
         annotations:
-          authn-jwt/demo-cluster/kubernetes.io/namespace: bnl-demo-app-ns
-          authn-jwt/demo-cluster/kubernetes.io/serviceaccount/name: demo-app-jwt-sa
+          authn-jwt/$CONJUR_AUTHENTICATOR_ID/kubernetes.io/namespace: bnl-demo-app-ns
+          authn-jwt/$CONJUR_AUTHENTICATOR_ID/kubernetes.io/serviceaccount/name: demo-app-jwt-sa
       - !host
         id: system:serviceaccount:bnl-demo-app-ns:demo-app-secrets-provider-init-sa
         annotations:
-          authn-jwt/demo-cluster/kubernetes.io/namespace: bnl-demo-app-ns
-          authn-jwt/demo-cluster/kubernetes.io/serviceaccount/name: demo-app-secrets-provider-init-sa
+          authn-jwt/$CONJUR_AUTHENTICATOR_ID/kubernetes.io/namespace: bnl-demo-app-ns
+          authn-jwt/$CONJUR_AUTHENTICATOR_ID/kubernetes.io/serviceaccount/name: demo-app-secrets-provider-init-sa
       - !host
         id: system:serviceaccount:bnl-demo-app-ns:demo-app-secrets-provider-sidecar-sa
         annotations:
-          authn-jwt/demo-cluster/kubernetes.io/namespace: bnl-demo-app-ns
-          authn-jwt/demo-cluster/kubernetes.io/serviceaccount/name: demo-app-secrets-provider-sidecar-sa
+          authn-jwt/$CONJUR_AUTHENTICATOR_ID/kubernetes.io/namespace: bnl-demo-app-ns
+          authn-jwt/$CONJUR_AUTHENTICATOR_ID/kubernetes.io/serviceaccount/name: demo-app-secrets-provider-sidecar-sa
       - !host
         id: system:serviceaccount:bnl-demo-app-ns:demo-app-push-to-file-sidecar-sa
         annotations:
-          authn-jwt/demo-cluster/kubernetes.io/namespace: bnl-demo-app-ns
-          authn-jwt/demo-cluster/kubernetes.io/serviceaccount/name: demo-app-push-to-file-sidecar-sa
+          authn-jwt/$CONJUR_AUTHENTICATOR_ID/kubernetes.io/namespace: bnl-demo-app-ns
+          authn-jwt/$CONJUR_AUTHENTICATOR_ID/kubernetes.io/serviceaccount/name: demo-app-push-to-file-sidecar-sa
       - !host
         id: system:serviceaccount:bnl-demo-app-ns:demo-app-summon-init-sa
         annotations:
-          authn-jwt/demo-cluster/kubernetes.io/namespace: bnl-demo-app-ns
-          authn-jwt/demo-cluster/kubernetes.io/serviceaccount/name: demo-app-summon-init-sa
+          authn-jwt/$CONJUR_AUTHENTICATOR_ID/kubernetes.io/namespace: bnl-demo-app-ns
+          authn-jwt/$CONJUR_AUTHENTICATOR_ID/kubernetes.io/serviceaccount/name: demo-app-summon-init-sa
       - !host
         id: system:serviceaccount:bnl-demo-app-ns:demo-app-summon-sidecar-sa
         annotations:
-          authn-jwt/demo-cluster/kubernetes.io/namespace: bnl-demo-app-ns
-          authn-jwt/demo-cluster/kubernetes.io/serviceaccount/name: demo-app-summon-sidecar-sa
+          authn-jwt/$CONJUR_AUTHENTICATOR_ID/kubernetes.io/namespace: bnl-demo-app-ns
+          authn-jwt/$CONJUR_AUTHENTICATOR_ID/kubernetes.io/serviceaccount/name: demo-app-summon-sidecar-sa
       - !host
         id: system:serviceaccount:bnl-demo-app-ns:demo-app-secretless-sa
         annotations:
-          authn-jwt/demo-cluster/kubernetes.io/namespace: bnl-demo-app-ns
-          authn-jwt/demo-cluster/kubernetes.io/serviceaccount/name: demo-app-secretless-sa
+          authn-jwt/$CONJUR_AUTHENTICATOR_ID/kubernetes.io/namespace: bnl-demo-app-ns
+          authn-jwt/$CONJUR_AUTHENTICATOR_ID/kubernetes.io/serviceaccount/name: demo-app-secretless-sa
       - !host
         id: system:serviceaccount:bnl-demo-app-ns:demo-db-mysql-sa
         annotations:
-          authn-jwt/demo-cluster/kubernetes.io/namespace: bnl-demo-app-ns
-          authn-jwt/demo-cluster/kubernetes.io/serviceaccount/name: demo-db-mysql-sa      
+          authn-jwt/$CONJUR_AUTHENTICATOR_ID/kubernetes.io/namespace: bnl-demo-app-ns
+          authn-jwt/$CONJUR_AUTHENTICATOR_ID/kubernetes.io/serviceaccount/name: demo-db-mysql-sa      
     - !grant
       role: !group
       members: *hosts
