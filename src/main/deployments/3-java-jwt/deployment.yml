@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: demo-app-jwt
-  namespace: bnl-demo-app-ns
+  namespace: $APP_NAMESPACE
   labels:
     app: demo-app-jwt
 spec:
@@ -49,7 +49,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: demo-app-jwt
-  namespace: bnl-demo-app-ns
+  namespace: $APP_NAMESPACE
 spec:
   type: NodePort
   ports:

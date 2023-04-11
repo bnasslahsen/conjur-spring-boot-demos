@@ -4,7 +4,7 @@ set -a
 source "./../../../../.env"
 set +a
 
-kubectl config set-context --current --namespace="bnl-demo-app-ns"
+kubectl config set-context --current --namespace="$APP_NAMESPACE"
 
 kubectl delete serviceaccount demo-app-jwt-sa --ignore-not-found=true
 kubectl create serviceaccount demo-app-jwt-sa
