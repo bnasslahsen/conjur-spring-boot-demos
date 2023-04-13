@@ -20,53 +20,16 @@ spec:
         - name: demo-app-summon-init
           image: bnasslahsen/conjur-spring-boot-demos-summon
           imagePullPolicy: IfNotPresent
-          env:
-            - name: CONJUR_AUTHN_TOKEN_FILE
-              value: /run/conjur/access-token
           ports:
             - containerPort: 8080
           envFrom:
             - configMapRef:
                 name: conjur-connect
           volumeMounts:
-            - mountPath: /run/conjur
-              name: conjur-access-token
-              readOnly: true
             - mountPath: /etc/summon
               name: summon-config
               readOnly: true
-      initContainers:
-        - image: registry.connect.redhat.com/cyberark/conjur-openshift-authenticator
-          name: configurator
-          imagePullPolicy: IfNotPresent
-          volumeMounts:
-            - mountPath: /run/conjur
-              name: conjur-access-token
-            - name: jwt-token
-              mountPath: /var/run/secrets/tokens
-          env:
-            - name: JWT_TOKEN_PATH
-              value: /var/run/secrets/tokens/jwt
-            - name: CONTAINER_MODE
-              value: init
-            - name: MY_POD_NAMESPACE
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.namespace
-          envFrom:
-            - configMapRef:
-                name: conjur-connect
       volumes:
-        - name: jwt-token
-          projected:
-            sources:
-              - serviceAccountToken:
-                  path: jwt
-                  expirationSeconds: 6000
-                  audience: conjur
-        - name: conjur-access-token
-          emptyDir:
-            medium: Memory
         - name: summon-config
           configMap:
             name: summon-config-init

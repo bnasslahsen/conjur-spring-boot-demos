@@ -19,7 +19,7 @@ spec:
       containers:
         - name: demo-app-jwt
           imagePullPolicy: IfNotPresent
-          image: bnasslahsen/conjur-spring-boot-demos-native
+          image: bnasslahsen/conjur-spring-boot-demos
           readinessProbe:
             httpGet:
               path: /actuator/health
@@ -31,19 +31,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: conjur-connect-spring-jwt
-          volumeMounts:
-            - name: jwt-token
-              mountPath: /var/run/secrets/tokens
           ports:
             - containerPort: 8080
-      volumes:
-        - name: jwt-token
-          projected:
-            sources:
-              - serviceAccountToken:
-                  path: jwt
-                  expirationSeconds: 6000
-                  audience: conjur
 ---
 apiVersion: v1
 kind: Service

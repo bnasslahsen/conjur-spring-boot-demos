@@ -21,7 +21,7 @@ kubectl create configmap conjur-connect-spring-jwt \
   --from-literal CONJUR_ACCOUNT="$CONJUR_ACCOUNT" \
   --from-literal CONJUR_APPLIANCE_URL="$CONJUR_APPLIANCE_URL"  \
   --from-literal CONJUR_AUTHENTICATOR_ID="$CONJUR_AUTHENTICATOR_ID"  \
-  --from-literal CONJUR_JWT_TOKEN_PATH="/var/run/secrets/tokens/jwt" \
+  --from-literal CONJUR_JWT_TOKEN_PATH="/var/run/secrets/kubernetes.io/serviceaccount/token" \
   --from-literal LOGGING_LEVEL_COM_CYBERARK=DEBUG  \
   --from-file "CONJUR_SSL_CERTIFICATE=conjur.pem"
 

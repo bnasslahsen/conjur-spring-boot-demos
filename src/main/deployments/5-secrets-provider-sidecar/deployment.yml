@@ -46,25 +46,9 @@ spec:
           name: configurator
           imagePullPolicy: IfNotPresent
           volumeMounts:
-            - name: conjur-status
-              mountPath: /conjur/status
-            - name: jwt-token
-              mountPath: /var/run/secrets/tokens
-            - mountPath: /run/conjur
-              name: conjur-access-token
-            - mountPath: /etc/conjur/ssl
-              name: conjur-certs
             - mountPath: /conjur/podinfo
               name: podinfo
           env:
-            - name: JWT_TOKEN_PATH
-              value: /var/run/secrets/tokens/jwt
-            - name: CONTAINER_MODE
-              value: sidecar
-            - name: MY_POD_NAMESPACE
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.namespace
             - name: K8S_SECRETS
               value: db-credentials-secrets-provider-for-k8s-sidecar
             - name: SECRETS_DESTINATION
@@ -73,22 +57,6 @@ spec:
             - configMapRef:
                 name: conjur-connect
       volumes:
-        - name: conjur-status
-          emptyDir:
-            medium: Memory
-        - name: jwt-token
-          projected:
-            sources:
-              - serviceAccountToken:
-                  path: jwt
-                  expirationSeconds: 6000
-                  audience: conjur
-        - emptyDir:
-            medium: Memory
-          name: conjur-access-token
-        - emptyDir:
-            medium: Memory
-          name: conjur-certs
         - downwardAPI:
             defaultMode: 420
             items:
