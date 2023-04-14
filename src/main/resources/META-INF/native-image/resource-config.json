@@ -107,17 +107,11 @@
   "bundles":[
     {
       "name":"com.mysql.cj.LocalizedErrorMessages",
-      "locales":[
-        "", 
-        "und"
-      ]
+      "locales":["und"]
     }, 
     {
       "name":"jakarta.servlet.LocalStrings",
-      "locales":[
-        "", 
-        "und"
-      ]
+      "locales":["und"]
     }, 
     {
       "name":"jakarta.servlet.http.LocalStrings",
@@ -135,10 +129,7 @@
     }, 
     {
       "name":"org.apache.catalina.authenticator.jaspic.LocalStrings",
-      "locales":[
-        "", 
-        "und"
-      ]
+      "locales":["und"]
     }, 
     {
       "name":"org.apache.catalina.connector.LocalStrings",
@@ -247,10 +238,7 @@
     }, 
     {
       "name":"org.apache.coyote.http11.filters.LocalStrings",
-      "locales":[
-        "", 
-        "und"
-      ]
+      "locales":["und"]
     }, 
     {
       "name":"org.apache.naming.LocalStrings",
@@ -296,10 +284,7 @@
     }, 
     {
       "name":"org.apache.tomcat.util.http.parser.LocalStrings",
-      "locales":[
-        "", 
-        "und"
-      ]
+      "locales":["und"]
     }, 
     {
       "name":"org.apache.tomcat.util.modeler.LocalStrings",

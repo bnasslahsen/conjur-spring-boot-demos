@@ -25,14 +25,14 @@ cd src/main/conjur
 
 - Set the environment variables in your IDE: CONJUR_APPLIANCE_URL, CONJUR_ACCOUNT, CONJUR_AUTHN_API_KEY, CONJUR_AUTHN_LOGIN, CONJUR_CERT_FILE
 - Run the application with the following profiles:
-  - `default` : For application without any secrets protection
-  - `secured` : For application with Conjur Spring-Boot plugin
+  - `not-secured` : For application without any secrets protection
+  - `default` : For application with Conjur Spring-Boot plugin
 
 ## Test the application outside the IDE:
 ```shell
 ./mvnw clean package
+./run.sh not-secured
 ./run.sh default
-./run.sh secured
 ```
 
 ## Building the Docker images

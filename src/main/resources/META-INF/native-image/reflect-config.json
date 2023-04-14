@@ -2470,6 +2470,16 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
+  "name":"org.cyberark.conjur.demos.common.ConjurSpringDbConfig",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[
+    {"name":"<init>","parameterTypes":[] }, 
+    {"name":"afterPropertiesSet","parameterTypes":[] }
+  ]
+},
+{
   "name":"org.cyberark.conjur.demos.common.DBPropRefresh",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
@@ -3418,7 +3428,8 @@
 {
   "name":"org.springdoc.webmvc.ui.SwaggerUiHome",
   "allDeclaredFields":true,
-  "queryAllDeclaredMethods":true
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"index","parameterTypes":[] }]
 },
 {
   "name":"org.springdoc.webmvc.ui.SwaggerWebMvcConfigurer",
@@ -4994,10 +5005,34 @@
   "methods":[
     {"name":"<init>","parameterTypes":[] }, 
     {"name":"afterPropertiesSet","parameterTypes":[] }, 
+    {"name":"determineDatabaseName","parameterTypes":[] }, 
+    {"name":"determineDriverClassName","parameterTypes":[] }, 
+    {"name":"determinePassword","parameterTypes":[] }, 
+    {"name":"determineUrl","parameterTypes":[] }, 
+    {"name":"determineUsername","parameterTypes":[] }, 
+    {"name":"getClassLoader","parameterTypes":[] }, 
+    {"name":"getDriverClassName","parameterTypes":[] }, 
+    {"name":"getEmbeddedDatabaseConnection","parameterTypes":[] }, 
+    {"name":"getJndiName","parameterTypes":[] }, 
+    {"name":"getName","parameterTypes":[] }, 
+    {"name":"getPassword","parameterTypes":[] }, 
+    {"name":"getType","parameterTypes":[] }, 
+    {"name":"getUrl","parameterTypes":[] }, 
+    {"name":"getUsername","parameterTypes":[] }, 
+    {"name":"getXa","parameterTypes":[] }, 
+    {"name":"initializeDataSourceBuilder","parameterTypes":[] }, 
+    {"name":"isGenerateUniqueName","parameterTypes":[] }, 
     {"name":"setBeanClassLoader","parameterTypes":["java.lang.ClassLoader"] }, 
+    {"name":"setDriverClassName","parameterTypes":["java.lang.String"] }, 
+    {"name":"setEmbeddedDatabaseConnection","parameterTypes":["org.springframework.boot.jdbc.EmbeddedDatabaseConnection"] }, 
+    {"name":"setGenerateUniqueName","parameterTypes":["boolean"] }, 
+    {"name":"setJndiName","parameterTypes":["java.lang.String"] }, 
+    {"name":"setName","parameterTypes":["java.lang.String"] }, 
     {"name":"setPassword","parameterTypes":["java.lang.String"] }, 
+    {"name":"setType","parameterTypes":["java.lang.Class"] }, 
     {"name":"setUrl","parameterTypes":["java.lang.String"] }, 
-    {"name":"setUsername","parameterTypes":["java.lang.String"] }
+    {"name":"setUsername","parameterTypes":["java.lang.String"] }, 
+    {"name":"setXa","parameterTypes":["org.springframework.boot.autoconfigure.jdbc.DataSourceProperties$Xa"] }
   ]
 },
 {
@@ -8592,6 +8627,11 @@
   "queryAllPublicMethods":true
 },
 {
+  "name":"org.springframework.web.servlet.SmartView",
+  "queryAllDeclaredMethods":true,
+  "queryAllPublicMethods":true
+},
+{
   "name":"org.springframework.web.servlet.ThemeResolver",
   "queryAllDeclaredMethods":true,
   "queryAllPublicMethods":true
@@ -8982,11 +9022,39 @@
 },
 {
   "name":"org.springframework.web.servlet.view.AbstractUrlBasedView",
-  "allDeclaredFields":true
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[
+    {"name":"afterPropertiesSet","parameterTypes":[] }, 
+    {"name":"checkResource","parameterTypes":["java.util.Locale"] }, 
+    {"name":"getUrl","parameterTypes":[] }, 
+    {"name":"setUrl","parameterTypes":["java.lang.String"] }, 
+    {"name":"toString","parameterTypes":[] }
+  ]
 },
 {
   "name":"org.springframework.web.servlet.view.AbstractView",
-  "allDeclaredFields":true
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[
+    {"name":"addStaticAttribute","parameterTypes":["java.lang.String","java.lang.Object"] }, 
+    {"name":"getAttributesMap","parameterTypes":[] }, 
+    {"name":"getBeanName","parameterTypes":[] }, 
+    {"name":"getContentType","parameterTypes":[] }, 
+    {"name":"getRequestContextAttribute","parameterTypes":[] }, 
+    {"name":"getStaticAttributes","parameterTypes":[] }, 
+    {"name":"isExposePathVariables","parameterTypes":[] }, 
+    {"name":"render","parameterTypes":["java.util.Map","jakarta.servlet.http.HttpServletRequest","jakarta.servlet.http.HttpServletResponse"] }, 
+    {"name":"setAttributes","parameterTypes":["java.util.Properties"] }, 
+    {"name":"setAttributesCSV","parameterTypes":["java.lang.String"] }, 
+    {"name":"setAttributesMap","parameterTypes":["java.util.Map"] }, 
+    {"name":"setBeanName","parameterTypes":["java.lang.String"] }, 
+    {"name":"setContentType","parameterTypes":["java.lang.String"] }, 
+    {"name":"setExposeContextBeansAsAttributes","parameterTypes":["boolean"] }, 
+    {"name":"setExposePathVariables","parameterTypes":["boolean"] }, 
+    {"name":"setExposedContextBeanNames","parameterTypes":["java.lang.String[]"] }, 
+    {"name":"setRequestContextAttribute","parameterTypes":["java.lang.String"] }
+  ]
 },
 {
   "name":"org.springframework.web.servlet.view.BeanNameViewResolver",
@@ -9021,6 +9089,12 @@
   "name":"org.springframework.web.servlet.view.InternalResourceViewResolver",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.springframework.web.servlet.view.RedirectView",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"isRedirectView","parameterTypes":[] }]
 },
 {
   "name":"org.springframework.web.servlet.view.UrlBasedViewResolver",
