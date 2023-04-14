@@ -20,20 +20,38 @@ spec:
         - name: demo-app-summon-sidecar
           imagePullPolicy: IfNotPresent
           image: bnasslahsen/conjur-spring-boot-demos-summon
+          env:
+            - name: CONJUR_AUTHN_TOKEN_FILE
+              value: /run/conjur/access-token
           ports:
             - containerPort: 8080
           envFrom:
             - configMapRef:
                 name: conjur-connect
           volumeMounts:
+            - mountPath: /run/conjur
+              name: conjur-access-token
+              readOnly: true
             - mountPath: /etc/summon
               name: summon-config
               readOnly: true
+        - image: registry.connect.redhat.com/cyberark/conjur-openshift-authenticator
+          name: configurator
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - mountPath: /run/conjur
+              name: conjur-access-token
+          envFrom:
+            - configMapRef:
+                name: conjur-connect
       volumes:
         - name: summon-config
           configMap:
             name: summon-config-sidecar
             defaultMode: 420
+        - name: conjur-access-token
+          emptyDir:
+            medium: Memory
 ---
 apiVersion: v1
 kind: Service
