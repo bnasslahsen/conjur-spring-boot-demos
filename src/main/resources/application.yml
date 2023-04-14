@@ -1,4 +1,8 @@
 spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password: test
   jpa:
     hibernate:
       ddl-auto: update
@@ -7,15 +11,15 @@ springdoc:
   swagger-ui:
     use-root-path: true
     display-request-duration: true
-    tagsSorter: alpha
-
-logging:
-  level:
-    com.cyberark: DEBUG
-    org.cyberark: DEBUG
+    tags-sorter: alpha
 
 management:
   endpoints:
     web:
       exposure:
         include: health, refresh
+
+logging:
+  level:
+    com.cyberark: DEBUG
+    org.cyberark: DEBUG

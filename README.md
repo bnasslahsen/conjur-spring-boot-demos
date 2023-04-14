@@ -25,14 +25,14 @@ cd src/main/conjur
 
 - Set the environment variables in your IDE: CONJUR_APPLIANCE_URL, CONJUR_ACCOUNT, CONJUR_AUTHN_API_KEY, CONJUR_AUTHN_LOGIN, CONJUR_CERT_FILE
 - Run the application with the following profiles:
-  - `not-secured` : For application without any secrets protection
-  - `default` : For application with Conjur Spring-Boot plugin
+    - `default` : For application without any secrets protection
+    - `secured` : For application with Conjur Spring-Boot plugin
 
 ## Test the application outside the IDE:
 ```shell
 ./mvnw clean package
-./run.sh not-secured
 ./run.sh default
+./run.sh secured
 ```
 
 ## Building the Docker images
@@ -80,13 +80,13 @@ cd src/main/deployments/5-secrets-provider-sidecar
 ```
 
 - For Push to File with Sidecar container:
-  - To test with H2:
+    - To test with H2:
 ```shell
 cd src/main/deployments/6-push-to-file/h2
 ./deploy-app.sh
 ./deploy-app-refresh.sh
 ```
-  - To test with MySQL:
+- To test with MySQL:
 ```shell
 cd src/main/deployments/6-push-to-file/mysql
 ./deploy-app.sh
@@ -106,7 +106,7 @@ cd src/main/deployments/8-summon-sidecar
 ```
 
 - For Secretless:
-To deploy the DB:
+  To deploy the DB:
 ```shell
 cd src/main/deployments/9-secretless/db
   ./deploy-app.sh
