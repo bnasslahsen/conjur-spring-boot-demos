@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.context.annotation.Profile;
 
 /**
  * The type Conjur spring db config.
@@ -14,7 +13,7 @@ import org.springframework.context.annotation.Profile;
  * @author bnasslahsen
  */
 @Primary
-@Profile("secured")
+//@Profile("secured")
 @Configuration(proxyBeanMethods=false)
 @ConfigurationProperties(prefix = "spring.datasource")
 public class ConjurSpringDbConfig extends DataSourceProperties {
