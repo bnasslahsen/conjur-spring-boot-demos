@@ -3,19 +3,16 @@ package org.cyberark.conjur.demos.common;
 import com.cyberark.conjur.springboot.annotations.ConjurValue;
 
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 
 /**
  * The type Conjur spring db config.
  *
  * @author bnasslahsen
  */
-@Primary
+//@Primary
 //@Profile("secured")
-@Configuration(proxyBeanMethods=false)
-@ConfigurationProperties(prefix = "spring.datasource")
+//@Configuration(proxyBeanMethods=false)
+//@ConfigurationProperties(prefix = "spring.datasource")
 public class ConjurSpringDbConfig extends DataSourceProperties {
 
 	/**
