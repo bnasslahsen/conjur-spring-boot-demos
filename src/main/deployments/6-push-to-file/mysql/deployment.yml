@@ -54,18 +54,11 @@ spec:
               readOnly: true
             - name: conjur-templates
               mountPath: /conjur/templates
-            - mountPath: /conjur/status
-              name: conjur-status
           ports:
             - containerPort: 8080
         - image: cyberark/secrets-provider-for-k8s
           name: configurator
           imagePullPolicy: IfNotPresent
-          lifecycle:
-            postStart:
-              exec:
-                command:
-                  - /usr/local/bin/conjur-secrets-provided.sh
           envFrom:
             - configMapRef:
                 name: conjur-connect
@@ -76,16 +69,11 @@ spec:
               mountPath: /conjur/secrets
             - name: conjur-templates
               mountPath: /conjur/templates
-            - mountPath: /conjur/status
-              name: conjur-status
       volumes:
         - name: conjur-templates
           configMap:
             name: spring-boot-templates
         - name: conjur-secrets
-          emptyDir:
-            medium: Memory
-        - name: conjur-status
           emptyDir:
             medium: Memory
         - downwardAPI:

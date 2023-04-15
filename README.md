@@ -44,7 +44,7 @@ cd src/main/conjur
 ./mvnw -Pnative clean spring-boot:build-image
 
 ## For summon
-podman build --arch=amd64 -f src/main/conjur/summon/Dockerfile -t conjur-spring-boot-demos-summon .
+docker build --platform=linux/amd64 -f src/main/conjur/summon/Dockerfile -t conjur-spring-boot-demos-summon .
 ```
 
 ## Deploy to k8s

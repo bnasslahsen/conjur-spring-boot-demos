@@ -35,7 +35,7 @@ spec:
             - mountPath: /etc/summon
               name: summon-config
               readOnly: true
-        - image: registry.connect.redhat.com/cyberark/conjur-openshift-authenticator
+        - image: cyberark/conjur-kubernetes-authenticator
           name: configurator
           imagePullPolicy: IfNotPresent
           volumeMounts:

@@ -18,8 +18,8 @@ spec:
       serviceAccountName: demo-app-api-key-sa
       containers:
         - name: demo-app-api-key
-          imagePullPolicy: Always
-          image: bnasslahsen/conjur-spring-boot-demos-native
+          imagePullPolicy: IfNotPresent
+          image: bnasslahsen/conjur-spring-boot-demos
           readinessProbe:
             httpGet:
               path: /actuator/health

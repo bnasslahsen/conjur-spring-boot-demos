@@ -18,8 +18,8 @@ spec:
       serviceAccountName: demo-app-jwt-sa
       containers:
         - name: demo-app-jwt
-          imagePullPolicy: Always
-          image: bnasslahsen/conjur-spring-boot-demos-native
+          imagePullPolicy: IfNotPresent
+          image: bnasslahsen/conjur-spring-boot-demos
           readinessProbe:
             httpGet:
               path: /actuator/health

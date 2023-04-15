@@ -21,21 +21,21 @@ spec:
           imagePullPolicy: IfNotPresent
           image: bnasslahsen/conjur-spring-boot-demos-native
           env:
-            - name: DB_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: db-credentials-secrets-provider-for-k8s-init
-                  key: username
-            - name: DB_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: db-credentials-secrets-provider-for-k8s-init
-                  key: password
-            - name: DB_URL
+            - name: SPRING_DATASOURCE_URL
               valueFrom:
                 secretKeyRef:
                   name: db-credentials-secrets-provider-for-k8s-init
                   key: address
+            - name: SPRING_DATASOURCE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials-secrets-provider-for-k8s-init
+                  key: username
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials-secrets-provider-for-k8s-init
+                  key: password
           ports:
             - containerPort: 8080
       initContainers:

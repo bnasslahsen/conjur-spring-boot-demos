@@ -8,6 +8,8 @@ spring:
       ddl-auto: update   
 
 management:
+  server:
+    port: 9090
   endpoints:
     web:
       exposure:

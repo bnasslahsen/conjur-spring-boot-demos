@@ -54,8 +54,6 @@ spec:
               readOnly: true
             - name: conjur-templates
               mountPath: /conjur/templates
-            - mountPath: /conjur/status
-              name: conjur-status
           ports:
             - containerPort: 8080
         - image: cyberark/secrets-provider-for-k8s
