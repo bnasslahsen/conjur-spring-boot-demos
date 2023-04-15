@@ -18,16 +18,16 @@ spec:
       serviceAccountName: demo-app-jwt-sa
       containers:
         - name: demo-app-jwt
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           image: bnasslahsen/conjur-spring-boot-demos-native
           readinessProbe:
             httpGet:
               path: /actuator/health
-              port: 8080
+              port: 9090
           livenessProbe:
             httpGet:
               path: /actuator/health
-              port: 8080
+              port: 9090
           envFrom:
             - configMapRef:
                 name: conjur-connect-spring-jwt

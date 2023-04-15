@@ -25,27 +25,25 @@ spec:
           - mysql-url
         conjur.org/secret-file-format.demo-app: "template"
         conjur.org/secret-file-path.demo-app: "./application.yml"
-        conjur.org/secrets-refresh-interval: 20s
+        conjur.org/secrets-refresh-interval: 10s
         conjur.org/secrets-refresh-enabled: "true"
     spec:
       serviceAccountName: demo-app-push-to-file-sidecar-sa
       containers:
         - name: demo-app-push-to-file-sidecar
           image: bnasslahsen/conjur-spring-boot-demos
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           readinessProbe:
             httpGet:
               path: /actuator/health
-              port: 8080
+              port: 9090
           livenessProbe:
             httpGet:
               path: /actuator/health
-              port: 8080
+              port: 9090
           env:
             - name: SPRING_CONFIG_LOCATION
               value: /opt/secrets/conjur/application.yml
-            - name: CONJUR_REFRESH_ENABLED
-              value: "true"
           # Path to the file with the secrets
           volumeMounts:
             - name: conjur-secrets
@@ -58,24 +56,19 @@ spec:
         - image: cyberark/secrets-provider-for-k8s
           name: configurator
           imagePullPolicy: IfNotPresent
-          lifecycle:
-            postStart:
-              exec:
-                command:
-                  - /usr/local/bin/conjur-secrets-provided.sh
           envFrom:
             - configMapRef:
                 name: conjur-connect
           livenessProbe:
             exec:
               command:
-                - sh
+                - /bin/sh
                 - -c
-                - |
-                  /conjur/status/conjur-secrets-unchanged.sh
+                - >
+                  /conjur/status/conjur-secrets-unchanged.sh;
                   if [ "$?" -ne 0 ]; then
-                      wget -q --header="Content-Type: application/json" --post-data='{}' http://localhost:8080/actuator/refresh >/dev/null 2>&1
-                      exit 0
+                    wget -q --header='Content-Type: application/json' --post-data='{}' http://localhost:9090/actuator/refresh >/dev/null 2>&1;
+                    exit 0;
                   fi
             failureThreshold: 1
             initialDelaySeconds: 5

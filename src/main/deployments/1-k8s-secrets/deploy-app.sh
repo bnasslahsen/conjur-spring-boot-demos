@@ -14,7 +14,7 @@ kubectl delete secret db-credentials --ignore-not-found=true
 kubectl create secret generic db-credentials \
     --from-literal=url=jdbc:h2:mem:testdb \
     --from-literal=username=h2-user  \
-    --from-literal=password=toto
+    --from-literal=password=hardcoded-secret
 
 # DEPLOYMENT
 envsubst < deployment.yml | kubectl replace --force -f -

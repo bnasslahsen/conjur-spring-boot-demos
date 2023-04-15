@@ -18,16 +18,16 @@ spec:
       serviceAccountName: demo-app-sa
       containers:
         - name: demo-app
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           image: bnasslahsen/conjur-spring-boot-demos
           readinessProbe:
             httpGet:
               path: /actuator/health
-              port: 8080
+              port: 9090
           livenessProbe:
             httpGet:
               path: /actuator/health
-              port: 8080
+              port: 9090
           env:
             - name: SPRING_DATASOURCE_URL
               valueFrom:

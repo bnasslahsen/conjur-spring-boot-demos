@@ -36,19 +36,17 @@ spec:
           readinessProbe:
             httpGet:
               path: /actuator/health
-              port: 8080
+              port: 9090
           livenessProbe:
             httpGet:
               path: /actuator/health
-              port: 8080
+              port: 9090
             failureThreshold: 1
             initialDelaySeconds: 30
             periodSeconds: 5
           env:
             - name: SPRING_CONFIG_LOCATION
               value: /opt/secrets/conjur/application.yml
-            - name: CONJUR_DETECT_CHANGE
-              value: "true"
           # Path to the file with the secrets
           volumeMounts:
             - name: conjur-secrets

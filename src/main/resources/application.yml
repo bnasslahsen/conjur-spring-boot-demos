@@ -14,6 +14,8 @@ springdoc:
     tags-sorter: alpha
 
 management:
+  server:
+    port: 9090
   endpoints:
     web:
       exposure:

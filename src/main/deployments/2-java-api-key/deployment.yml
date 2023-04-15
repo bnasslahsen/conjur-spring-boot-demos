@@ -18,16 +18,16 @@ spec:
       serviceAccountName: demo-app-api-key-sa
       containers:
         - name: demo-app-api-key
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           image: bnasslahsen/conjur-spring-boot-demos-native
           readinessProbe:
             httpGet:
               path: /actuator/health
-              port: 8080
+              port: 9090
           livenessProbe:
             httpGet:
               path: /actuator/health
-              port: 8080
+              port: 9090
           envFrom:
             - configMapRef:
                 name: conjur-connect-java-api-key
