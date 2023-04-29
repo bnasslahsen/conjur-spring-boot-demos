@@ -10,7 +10,9 @@ POD_NAME=$(kubectl get pods -l app=demo-db-mysql -o=name)
 MYSQL_ROOT_USER=root
 MYSQL_ROOT_PASSWORD=demo-db
 MYSQL_USER=demo-db
-NEW_PASSWORD=demo-db52
+
+# Generate random secret (done by CyberArk CPM in production)
+NEW_PASSWORD=$(openssl rand -hex 12 | tr -d '\r\n')
 
 
 # Connect to MySQL and update password
