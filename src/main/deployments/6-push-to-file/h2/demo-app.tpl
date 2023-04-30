@@ -23,5 +23,4 @@ springdoc:
     
 logging:
   level:
-    com.cyberark: DEBUG
     org.cyberark: DEBUG

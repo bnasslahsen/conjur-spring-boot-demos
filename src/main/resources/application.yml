@@ -6,10 +6,6 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-  cloud:
-    refresh:
-      extra-refreshable: com.zaxxer.hikari.HikariDataSource
-
 
 springdoc:
   swagger-ui:
@@ -19,7 +15,6 @@ springdoc:
 
 logging:
   level:
-    com.cyberark: DEBUG
     org.cyberark: DEBUG
 
 management:

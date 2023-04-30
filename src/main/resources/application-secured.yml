@@ -11,9 +11,8 @@ springdoc:
 
 logging:
   level:
-    com.cyberark: DEBUG
     org.cyberark: DEBUG
-  
+
 management:
   server:
     port: 9090

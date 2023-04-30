@@ -47,6 +47,8 @@ spec:
           env:
             - name: SPRING_CONFIG_LOCATION
               value: /opt/secrets/conjur/application.yml
+            - name: SPRING_MAIN_CLOUD_PLATFORM
+              value: "NONE"
           # Path to the file with the secrets
           volumeMounts:
             - name: conjur-secrets

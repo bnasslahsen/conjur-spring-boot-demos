@@ -43,7 +43,7 @@ class VulnerableController {
 	/**
 	 * The Object mapper.
 	 */
-	private ObjectMapper objectMapper;
+	private final ObjectMapper objectMapper;
 
 	/**
 	 * The constant VARIABLE.
@@ -59,8 +59,8 @@ class VulnerableController {
 	 * Instantiates a new Vulnerable controller.
 	 *
 	 * @param dataSourceProperties the data source properties
-	 * @param secretsApi the secrets api
-	 * @param objectMapper the object mapper
+	 * @param secretsApi           the secrets api
+	 * @param objectMapper         the object mapper
 	 */
 	public VulnerableController(DataSourceProperties dataSourceProperties, SecretsApi secretsApi, ObjectMapper objectMapper) {
 		this.dataSourceProperties = dataSourceProperties;
@@ -124,14 +124,13 @@ class VulnerableController {
 	 * This method reacts to the refresh event and prints properties value.
 	 */
 	@EventListener(RefreshScopeRefreshedEvent.class)
-	public void reactOnRefresh(RefreshScopeRefreshedEvent event) {
-		LOGGER.info("^^^^^^^^^^^^^^^^^^^^^");
-		LOGGER.info("^^^^^^^^^^^^^^^^^^^^^");
-		LOGGER.info("refresh has happened");
-		LOGGER.info("^^^^^^^^^^^^^^^^^^^^^");
-		LOGGER.info("^^^^^^^^^^^^^^^^^^^^^");
-		LOGGER.info("getUsername = {}", dataSourceProperties.getUsername());
-		LOGGER.info("getPassword = {}", dataSourceProperties.getPassword());
-		LOGGER.info("getUrl = {}", dataSourceProperties.getUrl());
+	public void reactOnRefresh() {
+		LOGGER.debug("********************************");
+		LOGGER.debug("*** Refresh Event Triggered ***");
+		LOGGER.debug("********************************");
+		LOGGER.debug("Refreshing database connection...");
+		LOGGER.debug("DB Url = {}", dataSourceProperties.getUrl());
+		LOGGER.debug("DB Username = {}", dataSourceProperties.getUsername());
+		LOGGER.debug("DB Password = {}", dataSourceProperties.getPassword());
 	}
 }
