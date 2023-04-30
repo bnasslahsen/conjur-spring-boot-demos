@@ -85,21 +85,3 @@ spec:
   selector:
     app: demo-app-secrets-provider-sidecar
 
----
-# internal service for watcher
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    app: demo-app-secrets-provider-sidecar
-  name: demo-app-secrets-provider-sidecar-interne
-  annotations:
-    boot.spring.io/actuator: http://:8080/actuator
-spec:
-  ports:
-    - name: http
-      port: 8080
-      targetPort: 8080
-  selector:
-    app: demo-app-secrets-provider-sidecar
-  type: ClusterIP

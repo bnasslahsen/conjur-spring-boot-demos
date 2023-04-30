@@ -3,6 +3,10 @@ spring:
     name: config-server
   cloud:
     kubernetes:
+      reload:
+        enabled: true
+        monitoring-secrets: true
+        monitoring-config-maps: false
       secrets:
         enable-api: true
         name:  db-credentials-secrets-provider-for-k8s-sidecar
