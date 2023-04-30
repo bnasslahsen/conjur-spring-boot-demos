@@ -140,6 +140,12 @@
 			<properties>
 				<image.name>${project.artifactId}-native</image.name>
 			</properties>
+			<dependencies>
+				<dependency>
+					<groupId>org.springframework.cloud</groupId>
+					<artifactId>spring-cloud-starter-bootstrap</artifactId>
+				</dependency>
+			</dependencies>
 		</profile>
 	</profiles>
 </project>
