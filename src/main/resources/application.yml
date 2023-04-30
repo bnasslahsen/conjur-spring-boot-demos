@@ -17,3 +17,9 @@ logging:
   level:
     com.cyberark: DEBUG
     org.cyberark: DEBUG
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh
