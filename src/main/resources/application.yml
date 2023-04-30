@@ -6,6 +6,10 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+  cloud:
+    refresh:
+      extra-refreshable: com.zaxxer.hikari.HikariDataSource
+
 
 springdoc:
   swagger-ui:
@@ -19,7 +23,9 @@ logging:
     org.cyberark: DEBUG
 
 management:
+  server:
+    port: 9090
   endpoints:
     web:
       exposure:
-        include: refresh
+        include: health, refresh

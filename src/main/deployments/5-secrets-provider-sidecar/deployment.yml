@@ -16,7 +16,7 @@ spec:
       annotations:
         conjur.org/container-mode: sidecar
         conjur.org/secrets-refresh-enabled: "true"
-        conjur.org/secrets-refresh-interval: 1s
+        conjur.org/secrets-refresh-interval: 10s
       labels:
         app: demo-app-secrets-provider-sidecar
     spec:
@@ -26,6 +26,9 @@ spec:
           image: bnasslahsen/conjur-spring-boot-demos
           ports:
             - containerPort: 8080
+          env:
+            - name: SPRING_CLOUD_BOOTSTRAP_ENABLED
+              value: "true"
         - image: cyberark/secrets-provider-for-k8s
           name: configurator
           imagePullPolicy: IfNotPresent
