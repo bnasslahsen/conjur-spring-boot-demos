@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -15,31 +16,36 @@ spec:
       annotations:
         conjur.org/container-mode: sidecar
         conjur.org/secrets-refresh-enabled: "true"
-        conjur.org/secrets-refresh-interval: 20s
+        conjur.org/secrets-refresh-interval: 1s
       labels:
         app: demo-app-secrets-provider-sidecar
     spec:
       serviceAccountName: demo-app-secrets-provider-sidecar-sa
       containers:
         - name: demo-app-secrets-provider-sidecar
-          imagePullPolicy: IfNotPresent
-          image: bnasslahsen/conjur-spring-boot-demos-native
+          image: bnasslahsen/conjur-spring-boot-demos
           env:
+            - name: LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_CLOUD_KUBERNETES_CLIENT_CONFIG_RELOAD
+              value: DEBUG
             - name: SPRING_DATASOURCE_URL
               valueFrom:
                 secretKeyRef:
                   name: db-credentials-secrets-provider-for-k8s-sidecar
-                  key: address
+                  key: spring.datasource.url
             - name: SPRING_DATASOURCE_USERNAME
               valueFrom:
                 secretKeyRef:
                   name: db-credentials-secrets-provider-for-k8s-sidecar
-                  key: username
+                  key: spring.datasource.username
             - name: SPRING_DATASOURCE_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: db-credentials-secrets-provider-for-k8s-sidecar
-                  key: password
+                  key: spring.datasource.password
+            - name: SPRING_APPLICATION_NAME
+              value: "demo-app-secrets-provider-sidecar"
+            - name: SPRING_CLOUD_BOOTSTRAP_ENABLED
+              value: "true"
           ports:
             - containerPort: 8080
         - image: cyberark/secrets-provider-for-k8s
@@ -78,3 +84,22 @@ spec:
       nodePort: 32083
   selector:
     app: demo-app-secrets-provider-sidecar
+
+---
+# internal service for watcher
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: demo-app-secrets-provider-sidecar
+  name: demo-app-secrets-provider-sidecar-interne
+  annotations:
+    boot.spring.io/actuator: http://:8080/actuator
+spec:
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
+  selector:
+    app: demo-app-secrets-provider-sidecar
+  type: ClusterIP

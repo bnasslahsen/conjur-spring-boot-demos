@@ -17,6 +17,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
+import org.springframework.cloud.context.scope.refresh.RefreshScopeRefreshedEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -115,5 +117,21 @@ class VulnerableController {
 		ObjectWriter writer = objectMapper.writer().with(SerializationFeature.INDENT_OUTPUT);
 		String json = writer.writeValueAsString(response);
 		return ResponseEntity.ok().body(json);
+	}
+
+
+	/**
+	 * This method reacts to the refresh event and prints properties value.
+	 */
+	@EventListener(RefreshScopeRefreshedEvent.class)
+	public void reactOnRefresh(RefreshScopeRefreshedEvent event) {
+		LOGGER.info("^^^^^^^^^^^^^^^^^^^^^");
+		LOGGER.info("^^^^^^^^^^^^^^^^^^^^^");
+		LOGGER.info("refresh has happened");
+		LOGGER.info("^^^^^^^^^^^^^^^^^^^^^");
+		LOGGER.info("^^^^^^^^^^^^^^^^^^^^^");
+		LOGGER.info("getUsername = {}", dataSourceProperties.getUsername());
+		LOGGER.info("getPassword = {}", dataSourceProperties.getPassword());
+		LOGGER.info("getUrl = {}", dataSourceProperties.getUrl());
 	}
 }

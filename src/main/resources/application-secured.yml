@@ -2,7 +2,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-
+  
 springdoc:
   swagger-ui:
     use-root-path: true
@@ -13,11 +13,13 @@ logging:
   level:
     com.cyberark: DEBUG
     org.cyberark: DEBUG
-
+  
 management:
   server:
     port: 9090
   endpoints:
     web:
       exposure:
-        include: health, refresh
+        include: *
+  
+  

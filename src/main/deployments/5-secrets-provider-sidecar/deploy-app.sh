@@ -9,6 +9,8 @@ kubectl config set-context --current --namespace="$APP_NAMESPACE"
 kubectl delete serviceaccount demo-app-secrets-provider-sidecar-sa --ignore-not-found=true
 kubectl create serviceaccount demo-app-secrets-provider-sidecar-sa
 
+envsubst < roles.yaml | kubectl replace --force -f -
+
 # DB SECRETS
 envsubst < k8s-secrets.yml | kubectl replace --force -f -
 
@@ -16,6 +18,9 @@ envsubst < k8s-secrets.yml | kubectl replace --force -f -
 envsubst < service-account-role.yml | kubectl replace --force -f -
 
 # DEPLOYMENT
+
+envsubst < watcher.yml | kubectl replace --force -f -
+
 envsubst < deployment.yml | kubectl replace --force -f -
 if ! kubectl wait deployment demo-app-secrets-provider-sidecar --for condition=Available=True --timeout=90s
   then exit 1

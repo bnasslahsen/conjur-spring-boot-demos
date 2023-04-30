@@ -1,0 +1,3 @@
+- !grant
+  role: !group $CONJUR_AUTHENTICATOR_ID/apps
+  member: !group /data/bnl/ocp-apps

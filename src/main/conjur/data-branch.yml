@@ -9,3 +9,8 @@
   annotations:
     description: All Badr policies
 
+
+- !policy
+  id: conjur/authn-jwt
+  annotations:
+    description: All authn jwt policies

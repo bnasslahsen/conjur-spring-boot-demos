@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: config-server
+  cloud:
+    kubernetes:
+      secrets:
+        enable-api: true
+        name:  db-credentials-secrets-provider-for-k8s-sidecar
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh

@@ -1,0 +1,51 @@
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  namespace: $APP_NAMESPACE
+  name: namespace-reader
+rules:
+  - apiGroups: ["", "extensions", "apps"]
+    resources: ["configmaps", "pods", "services", "endpoints", "secrets"]
+    verbs: ["get", "list", "watch", "edit"]
+
+---
+
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: namespace-reader-binding
+  namespace: $APP_NAMESPACE
+subjects:
+  - kind: ServiceAccount
+    namespace: $APP_NAMESPACE
+    name: demo-app-secrets-provider-sidecar-sa
+    apiGroup: ""
+roleRef:
+  kind: Role
+  name: namespace-reader
+  apiGroup: ""
+
+---
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    app: spring-cloud-kubernetes-configuration-watcher
+  name: spring-cloud-kubernetes-configuration-watcher
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  labels:
+    app: spring-cloud-kubernetes-configuration-watcher
+  name: spring-cloud-kubernetes-configuration-watcher:view
+roleRef:
+  kind: Role
+  apiGroup: rbac.authorization.k8s.io
+  name: namespace-reader
+subjects:
+  - kind: ServiceAccount
+    name: spring-cloud-kubernetes-configuration-watcher

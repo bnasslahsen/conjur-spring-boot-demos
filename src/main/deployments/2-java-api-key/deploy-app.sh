@@ -21,7 +21,7 @@ kubectl create configmap conjur-connect-java-api-key \
   --from-literal CONJUR_AUTHN_API_KEY="$CONJUR_AUTHN_API_KEY"  \
   --from-literal CONJUR_ACCOUNT="$CONJUR_ACCOUNT" \
   --from-literal CONJUR_AUTHN_LOGIN="$CONJUR_AUTHN_LOGIN" \
-  --from-literal CONJUR_APPLIANCE_URL="$CONJUR_APPLIANCE_URL"  \
+  --from-literal CONJUR_APPLIANCE_URL="$CYBERARK_CONJUR_APPLIANCE_URL"  \
   --from-literal LOGGING_LEVEL_COM_CYBERARK=DEBUG  \
   --from-file "CONJUR_SSL_CERTIFICATE=conjur.pem"
 

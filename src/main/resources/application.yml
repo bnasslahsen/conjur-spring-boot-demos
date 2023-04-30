@@ -13,14 +13,6 @@ springdoc:
     display-request-duration: true
     tags-sorter: alpha
 
-management:
-  server:
-    port: 9090
-  endpoints:
-    web:
-      exposure:
-        include: health, refresh
-
 logging:
   level:
     com.cyberark: DEBUG
