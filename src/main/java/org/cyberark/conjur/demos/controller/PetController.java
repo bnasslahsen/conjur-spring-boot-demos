@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.cyberark.conjur.demos.model.Pet;
 import org.cyberark.conjur.demos.repository.PetRepository;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
@@ -27,13 +29,8 @@ class PetController {
 	}
 
 	@GetMapping("/{id}")
-	ResponseEntity<Pet> getPet(@PathVariable Long id) {
-		Pet pet = repository.findById(id).orElseThrow(null);
-		if (pet == null) {
-			return ResponseEntity.notFound().build();
-		}
-
-		return ResponseEntity.ok().body(pet);
+	Pet getPet(@PathVariable Long id) {
+		return repository.findById(id).orElseThrow(() ->new ResponseStatusException(HttpStatus.NOT_FOUND));
 	}
 
 	@PostMapping()
@@ -51,12 +48,11 @@ class PetController {
 	}
 
 	@DeleteMapping("/{id}")
-	ResponseEntity<?> deletePet(@PathVariable Long id) {
-		Pet pet = repository.findById(id).orElseThrow(null);
+	ResponseEntity<Void> deletePet(@PathVariable Long id) {
+		Pet pet = repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 		if (pet == null) {
 			return ResponseEntity.notFound().build();
 		}
-
 		repository.delete(pet);
 		return ResponseEntity.ok().build();
 	}
