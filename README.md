@@ -51,68 +51,43 @@ docker build --platform=linux/amd64 -f src/main/conjur/summon/Dockerfile -t conj
 
 - For Application with K8s secrets:
 ```shell
-cd src/main/deployments/1-k8s-secrets
-./deploy-app.sh
-```
-
-- For API KEY profile:
-```shell
-cd src/main/deployments/2-java-api-key
+cd src/main/deployments/0-k8s-secrets
 ./deploy-app.sh
 ```
 
 - For JWT profile:
 ```shell
-cd src/main/deployments/3-java-jwt
+cd src/main/deployments/1-java-jwt
 ./deploy-app.sh
-```
-
-- For Secrets Provider for k8s with Init container:
-```shell
-  cd src/main/deployments/4-secrets-provider-init
-  ./deploy-app.sh
 ```
 
 - For Secrets Provider for k8s with Sidecar container:
 ```shell
-cd src/main/deployments/5-secrets-provider-sidecar
-./deploy-app.sh
+  cd src/main/deployments/2-provider-k8s-secrets
+  ./deploy-app.sh
 ```
 
 - For Push to File with Sidecar container:
     - To test with H2:
 ```shell
-cd src/main/deployments/6-push-to-file/h2
-./deploy-app.sh
-./deploy-app.sh
-```
-- To test with MySQL:
-```shell
-cd src/main/deployments/6-push-to-file/mysql
-./deploy-app.sh
+cd src/main/deployments/3-provider-push-to-file
 ./deploy-app.sh
 ```
 
-- For Summon with Init Container:
+- For Summon:
 ```shell
-cd src/main/deployments/7-summon-init
-  ./deploy-app.sh
-```
-
-- For Summon with Sidecar Container:
-```shell
-cd src/main/deployments/8-summon-sidecar
+cd src/main/deployments/4-summon
   ./deploy-app.sh
 ```
 
 - For Secretless:
   To deploy the DB:
 ```shell
-cd src/main/deployments/9-secretless/db
+cd src/main/deployments/5-secretless/db
   ./deploy-app.sh
 ```
 To deploy the App:
 ```shell
-cd src/main/deployments/9-secretless/app
+cd src/main/deployments/5-secretless/app
   ./deploy-app.sh
 ```
