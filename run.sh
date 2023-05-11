@@ -12,7 +12,6 @@ jenv exec java  -Dspring.aot.enabled=true  \
     -Dspring.datasource.url=jdbc:mysql://localhost:3306/demo-db \
     -Dspring.datasource.username=demo-db \
     -Dspring.datasource.password=demo-db \
-    -Dconjur.refresh.enabled=true  \
     -agentlib:native-image-agent=config-merge-dir=src/main/resources/META-INF/native-image/ \
     -jar target/conjur-spring-boot-demos-1.0.jar
 

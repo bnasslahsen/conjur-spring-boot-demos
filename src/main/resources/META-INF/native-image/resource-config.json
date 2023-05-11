@@ -26,13 +26,19 @@
       "pattern":"\\QMETA-INF/services/ch.qos.logback.classic.spi.Configurator\\E"
     }, 
     {
+      "pattern":"\\QMETA-INF/services/jakarta.el.ExpressionFactory\\E"
+    }, 
+    {
+      "pattern":"\\QMETA-INF/services/jakarta.validation.spi.ValidationProvider\\E"
+    }, 
+    {
+      "pattern":"\\QMETA-INF/services/java.sql.Driver\\E"
+    }, 
+    {
       "pattern":"\\QMETA-INF/services/javax.el.ExpressionFactory\\E"
     }, 
     {
       "pattern":"\\QMETA-INF/services/javax.validation.spi.ValidationProvider\\E"
-    }, 
-    {
-      "pattern":"\\QMETA-INF/services/java.sql.Driver\\E"
     }, 
     {
       "pattern":"\\QMETA-INF/services/org.slf4j.spi.SLF4JServiceProvider\\E"
@@ -107,7 +113,21 @@
   "bundles":[
     {
       "name":"com.mysql.cj.LocalizedErrorMessages",
-      "locales":["und"]
+      "locales":[
+        "", 
+        "und"
+      ]
+    }, 
+    {
+      "name":"jakarta.servlet.LocalStrings",
+      "locales":[""]
+    }, 
+    {
+      "name":"jakarta.servlet.http.LocalStrings",
+      "locales":[
+        "", 
+        "und"
+      ]
     }, 
     {
       "name":"javax.servlet.LocalStrings",
@@ -115,10 +135,7 @@
     }, 
     {
       "name":"javax.servlet.http.LocalStrings",
-      "locales":[
-        "", 
-        "und"
-      ]
+      "locales":["und"]
     }, 
     {
       "name":"org.apache.catalina.authenticator.LocalStrings",
@@ -129,7 +146,10 @@
     }, 
     {
       "name":"org.apache.catalina.authenticator.jaspic.LocalStrings",
-      "locales":["und"]
+      "locales":[
+        "", 
+        "und"
+      ]
     }, 
     {
       "name":"org.apache.catalina.connector.LocalStrings",
@@ -238,7 +258,10 @@
     }, 
     {
       "name":"org.apache.coyote.http11.filters.LocalStrings",
-      "locales":["und"]
+      "locales":[
+        "", 
+        "und"
+      ]
     }, 
     {
       "name":"org.apache.naming.LocalStrings",
@@ -284,7 +307,10 @@
     }, 
     {
       "name":"org.apache.tomcat.util.http.parser.LocalStrings",
-      "locales":["und"]
+      "locales":[
+        "", 
+        "und"
+      ]
     }, 
     {
       "name":"org.apache.tomcat.util.modeler.LocalStrings",
