@@ -1,4 +1,6 @@
 spring:
+  profiles: 
+    active: refreshable
   datasource:
     url: {{ secret "mysql-url" }}
     username: {{ secret "mysql-username" }}

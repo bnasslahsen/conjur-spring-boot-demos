@@ -27,7 +27,7 @@ spec:
             - containerPort: 8080
           envFrom:
             - configMapRef:
-                name: conjur-connect
+                name: conjur-connect-summon
           volumeMounts:
             - mountPath: /run/conjur
               name: conjur-access-token
