@@ -32,7 +32,7 @@ spec:
       containers:
         - name: demo-app-push-to-file-sidecar
           image: bnasslahsen/conjur-spring-boot-demos
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           readinessProbe:
             httpGet:
               path: /actuator/health

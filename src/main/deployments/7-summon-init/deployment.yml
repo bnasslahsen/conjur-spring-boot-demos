@@ -19,7 +19,7 @@ spec:
       containers:
         - name: demo-app-summon-init
           image: bnasslahsen/conjur-spring-boot-demos-summon
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
           envFrom:
