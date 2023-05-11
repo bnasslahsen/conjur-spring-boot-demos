@@ -1,7 +1,7 @@
 #!/bin/bash
 
 set -a
-source "./../../../../../.env"
+source "./../../../../.env"
 set +a
 
 kubectl config set-context --current --namespace="$APP_NAMESPACE"
@@ -13,7 +13,7 @@ kubectl delete configmap spring-boot-templates --ignore-not-found=true
 kubectl create configmap spring-boot-templates --from-file=demo-app.tpl
 
 # DEPLOYMENT
-envsubst < deployment.yml | kubectl replace --force -f -
+envsubst < deployment-refresh.yml | kubectl replace --force -f -
 if ! kubectl wait deployment demo-app-push-to-file-sidecar --for condition=Available=True --timeout=90s
   then exit 1
 fi

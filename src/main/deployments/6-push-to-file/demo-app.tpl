@@ -20,3 +20,7 @@ springdoc:
     use-root-path: true
     display-request-duration: true
     tags-sorter: alpha
+    
+logging:
+  level:
+    org.cyberark: DEBUG

@@ -13,6 +13,10 @@ springdoc:
     display-request-duration: true
     tags-sorter: alpha
 
+logging:
+  level:
+    org.cyberark: DEBUG
+
 management:
   server:
     port: 9090

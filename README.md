@@ -84,13 +84,13 @@ cd src/main/deployments/5-secrets-provider-sidecar
 ```shell
 cd src/main/deployments/6-push-to-file/h2
 ./deploy-app.sh
-./deploy-app-refresh.sh
+./deploy-app.sh
 ```
 - To test with MySQL:
 ```shell
 cd src/main/deployments/6-push-to-file/mysql
 ./deploy-app.sh
-./deploy-app-refresh.sh
+./deploy-app.sh
 ```
 
 - For Summon with Init Container:

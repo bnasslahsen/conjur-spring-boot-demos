@@ -9,6 +9,10 @@ springdoc:
     display-request-duration: true
     tagsSorter: alpha
 
+logging:
+  level:
+    org.cyberark: DEBUG
+
 management:
   server:
     port: 9090

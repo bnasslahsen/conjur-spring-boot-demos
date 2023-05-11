@@ -29,6 +29,8 @@ spec:
           env:
             - name: SPRING_CLOUD_BOOTSTRAP_ENABLED
               value: "true"
+            - name: SPRING_PROFILES_ACTIVE
+              value: "refreshable"
         - image: cyberark/secrets-provider-for-k8s
           name: configurator
           imagePullPolicy: IfNotPresent

@@ -1,15 +1,12 @@
 #!/bin/bash
 
-set -a
-source "./../../../../../.env"
-set +a
-
 # Define MySQL credentials
 POD_NAME=$(kubectl get pods -l app=demo-db-mysql -o=name)
 
 MYSQL_ROOT_USER=root
 MYSQL_ROOT_PASSWORD=demo-db
 MYSQL_USER=demo-db
+APP_NAMESPACE=bnl-demo-app-ns
 
 # Generate random secret (done by CyberArk CPM in production)
 NEW_PASSWORD=$(openssl rand -hex 12 | tr -d '\r\n')
