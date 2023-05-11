@@ -116,6 +116,3 @@ To deploy the App:
 cd src/main/deployments/9-secretless/app
   ./deploy-app.sh
 ```
-
-### Rotation without an application restart:
-
