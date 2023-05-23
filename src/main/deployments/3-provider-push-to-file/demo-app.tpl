@@ -2,9 +2,9 @@ spring:
   profiles: 
     active: refreshable
   datasource:
-    url: {{ secret "mysql-url" }}
-    username: {{ secret "mysql-username" }}
-    password: {{ secret "mysql-password" }}
+    url: {{ secret "url" }}
+    username: {{ secret "username" }}
+    password: {{ secret "password" }}
   jpa:
     hibernate:
       ddl-auto: update  

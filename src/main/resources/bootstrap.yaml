@@ -8,3 +8,5 @@ spring:
       secrets:
         enable-api: true
         name:  db-credentials-secrets-provider-for-k8s-sidecar
+      config:
+        enable-api: false

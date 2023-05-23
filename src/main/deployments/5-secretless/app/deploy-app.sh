@@ -18,7 +18,7 @@ kubectl create configmap secretless-config-mysql  --from-file=secretless.yml
 rm secretless.yml
 
 kubectl create configmap conjur-connect-secretless \
-  --from-literal SPRING_DATASOURCE_URL=jdbc:mysql://localhost:3306/demo-db \
+  --from-literal SPRING_DATASOURCE_URL=jdbc:mysql://localhost:3306/petstore \
   --from-literal SPRING_DATASOURCE_USERNAME=dummy \
   --from-literal SPRING_DATASOURCE_PASSWORD=dummy \
   --from-literal SPRING_MAIN_CLOUD_PLATFORM=NONE

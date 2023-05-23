@@ -9,8 +9,8 @@ kubectl config set-context --current --namespace="$APP_NAMESPACE"
 kubectl delete configmap conjur-connect-summon --ignore-not-found=true
 kubectl create configmap conjur-connect-summon \
   --from-literal CONJUR_ACCOUNT="$CONJUR_ACCOUNT" \
-  --from-literal CONJUR_APPLIANCE_URL="$CYBERARK_CONJUR_APPLIANCE_URL" \
-  --from-literal CONJUR_AUTHN_URL="$CYBERARK_CONJUR_APPLIANCE_URL"/authn-jwt/"$CONJUR_AUTHENTICATOR_ID" \
+  --from-literal CONJUR_APPLIANCE_URL="$CYBERARK_CONJUR_FOLLOWER_URL" \
+  --from-literal CONJUR_AUTHN_URL="$CYBERARK_CONJUR_FOLLOWER_URL"/authn-jwt/"$CONJUR_AUTHENTICATOR_ID" \
   --from-literal CONJUR_AUTHN_JWT_SERVICE_ID="$CONJUR_AUTHENTICATOR_ID" \
   --from-literal CONJUR_AUTHENTICATOR_ID="$CONJUR_AUTHENTICATOR_ID"  \
   --from-literal CONJUR_JWT_TOKEN_PATH="/var/run/secrets/kubernetes.io/serviceaccount/token" \

@@ -18,16 +18,8 @@ spec:
       serviceAccountName: demo-app-sa
       containers:
         - name: demo-app
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           image: bnasslahsen/conjur-spring-boot-demos
-          readinessProbe:
-            httpGet:
-              path: /actuator/health
-              port: 9090
-          livenessProbe:
-            httpGet:
-              path: /actuator/health
-              port: 9090
           env:
             - name: SPRING_DATASOURCE_URL
               valueFrom:
@@ -44,6 +36,8 @@ spec:
                 secretKeyRef:
                   name: db-credentials
                   key: password
+            - name: SPRING_MAIN_CLOUD_PLATFORM
+              value: "NONE"
           ports:
             - containerPort: 8080
 ---

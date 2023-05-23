@@ -19,17 +19,7 @@ spec:
       containers:
         - image: bnasslahsen/conjur-spring-boot-demos
           name: demo-app-secretless
-          imagePullPolicy: IfNotPresent
-          readinessProbe:
-            httpGet:
-              path: /actuator/health
-              port: 9090
-          livenessProbe:
-            httpGet:
-              path: /actuator/health
-              port: 9090
-            initialDelaySeconds: 30
-            periodSeconds: 5
+          imagePullPolicy: Always
           envFrom:
             - configMapRef:
                 name: conjur-connect-secretless
