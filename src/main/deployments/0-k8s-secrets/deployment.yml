@@ -18,7 +18,7 @@ spec:
       serviceAccountName: demo-app-sa
       containers:
         - name: demo-app
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           image: bnasslahsen/conjur-spring-boot-demos
           env:
             - name: SPRING_DATASOURCE_URL
