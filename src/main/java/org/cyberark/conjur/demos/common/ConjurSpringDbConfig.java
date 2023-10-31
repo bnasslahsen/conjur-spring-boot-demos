@@ -1,7 +1,6 @@
 package org.cyberark.conjur.demos.common;
 
 import com.cyberark.conjur.springboot.annotations.ConjurPropertySource;
-import com.cyberark.conjur.springboot.annotations.ConjurValue;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
@@ -19,7 +18,7 @@ import org.springframework.context.annotation.Profile;
 @Primary
 @Configuration(proxyBeanMethods=false)
 @ConfigurationProperties(prefix = "spring.datasource")
-@ConjurPropertySource(value={"data/bnl/ocp-apps/"})
+@ConjurPropertySource(value={"data/"})
 public class ConjurSpringDbConfig extends DataSourceProperties {
 
 	/**
@@ -37,7 +36,7 @@ public class ConjurSpringDbConfig extends DataSourceProperties {
 	/**
 	 * The Password.
 	 */
-	@ConjurValue(key="data/bnl/ocp-apps/password")
+	@Value("${password}")
 	private byte[] password;
 
 	@Override
