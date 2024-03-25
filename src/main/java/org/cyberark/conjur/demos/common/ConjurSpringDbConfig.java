@@ -18,7 +18,7 @@ import org.springframework.context.annotation.Profile;
 @Primary
 @Configuration(proxyBeanMethods=false)
 @ConfigurationProperties(prefix = "spring.datasource")
-@ConjurPropertySource(value={"data/"})
+@ConjurPropertySource({})
 public class ConjurSpringDbConfig extends DataSourceProperties {
 
 	/**

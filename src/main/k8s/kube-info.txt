@@ -1,0 +1,2 @@
+SA_ISSUER="https://kubernetes.default.svc"
+JWKS_URI="https://kubernetes.default.svc/keys"
